@@ -1,0 +1,44 @@
+﻿@page
+@model TaskManager.Pages.Projects.Taskings.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Tasking</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tasking.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tasking.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tasking.Severity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tasking.Severity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tasking.Progression)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tasking.Progression)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Tasking.Project)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tasking.Project.ProjectID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Tasking.TaskingID">Edit</a> |
+    <a asp-page="./Delete" asp-route-id="@Model.Tasking.TaskingID">Delete</a> |
+    <a asp-page="/Projects/Details" asp-route-id=@Model.Tasking.ProjectID>Back to Project Page</a>
+</div>

@@ -1,0 +1,50 @@
+﻿@page
+@model TaskManager.Pages.Projects.Taskings.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Tasking</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Tasking.TaskingID" />
+            <div class="form-group">
+                <label asp-for="Tasking.ProjectID" class="control-label"></label>
+                <input asp-for="Tasking.ProjectID" class="form-control" value=@ViewBag.ProjectID readonly></input>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tasking.Description" class="control-label"></label>
+                <input asp-for="Tasking.Description" class="form-control" />
+                <span asp-validation-for="Tasking.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tasking.Severity" class="control-label"></label>
+                <input asp-for="Tasking.Severity" class="form-control" />
+                <span asp-validation-for="Tasking.Severity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tasking.Progression" class="control-label"></label>
+                <input asp-for="Tasking.Progression" class="form-control" />
+                <span asp-validation-for="Tasking.Progression" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Details" asp-route-id=@ViewBag.TaskingID>Back to Item Page</a> | 
+    <a asp-page="/Projects/Details" asp-route-id=@ViewBag.ProjectID>Back to Project Page</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
