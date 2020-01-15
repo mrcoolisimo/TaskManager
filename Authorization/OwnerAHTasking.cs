@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TaskManager.Models;
 
@@ -23,7 +20,7 @@ namespace TaskManager.Authorization
 								OperationAuthorizationRequirement requirement,
 								Tasking resource)
 		{
-			
+
 			//If no user or resource
 			if (context.User == null || resource == null)
 			{
@@ -31,7 +28,7 @@ namespace TaskManager.Authorization
 				//return Task.CompletedTask;
 				return Task.CompletedTask;
 			}
-			
+
 			/*
 			if (requirement.Name == Constants.UpdateOperationName)
 			{
@@ -48,7 +45,7 @@ namespace TaskManager.Authorization
 
 			//If the user matches the OwnerID on this object, then the CRUD request succeeds
 			//If you created your task, you have full ownership of the task
-			if (resource.Project.OwnerID == _userManager.GetUserId(context.User) || 
+			if (resource.Project.OwnerID == _userManager.GetUserId(context.User) ||
 				resource.TaskOwner == _userManager.GetUserId(context.User) ||
 				resource.Assignment == _userManager.GetUserId(context.User))
 			{

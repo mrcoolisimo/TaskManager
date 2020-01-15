@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using TaskManager.Authorization;
 using TaskManager.Data;
 using TaskManager.Models;
@@ -45,12 +40,12 @@ namespace TaskManager.Pages.Projects
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                      User, Project,
                                                      Operations.Update);
-            
+
             if (!isAuthorized.Succeeded)
             {
-                    return Forbid();
+                return Forbid();
             }
-            
+
             //------------
 
             /*
@@ -59,7 +54,7 @@ namespace TaskManager.Pages.Projects
                 return NotFound();
             }
             */
-            
+
 
             if (Project == null)
             {
@@ -69,7 +64,8 @@ namespace TaskManager.Pages.Projects
             if (Project.Members.Count > 0)
             {
                 ViewData["HasMembers"] = true;
-            } else
+            }
+            else
             {
                 ViewData["HasMembers"] = false;
             }
@@ -82,11 +78,11 @@ namespace TaskManager.Pages.Projects
         public async Task<IActionResult> OnPostAsync(int id)
         {
             //Owner Authorization!
-            
+
             var project = await Context
                 .Project.AsNoTracking()
                 .FirstOrDefaultAsync(p => p.ProjectID == id);
-            
+
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                      User, project,
                                                      Operations.Create);
@@ -94,17 +90,17 @@ namespace TaskManager.Pages.Projects
             {
                 return Forbid();
             }
-            
+
             //------------
 
-            
+
             Member.ProjectID = id;
             Member.ProjectName = project.Title;
             Member.Email = project.Owner;
             Member.IsOwner = 1;
             Context.Member.Add(Member);
             await Context.SaveChangesAsync();
-            
+
 
             return RedirectToPage("/Projects/TaskManagement", new { id = project.ProjectID });
         }

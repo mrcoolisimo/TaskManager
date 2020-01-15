@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using TaskManager.Authorization;
 using TaskManager.Data;
 using TaskManager.Models;
@@ -55,7 +52,7 @@ namespace TaskManager.Pages.Projects.Members
             {
                 return NotFound();
             }
-           ViewData["ProjectID"] = new SelectList(Context.Project, "ProjectID", "ProjectID");
+            ViewData["ProjectID"] = new SelectList(Context.Project, "ProjectID", "ProjectID");
             return Page();
         }
 
@@ -91,7 +88,7 @@ namespace TaskManager.Pages.Projects.Members
             }
             //------------
 
-            Member.MemberID = member.MemberID; 
+            Member.MemberID = member.MemberID;
             Member.ProjectID = member.ProjectID;
             Member.ProjectName = member.ProjectName;
             Member.Email = member.Email;

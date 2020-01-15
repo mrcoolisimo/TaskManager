@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 using TaskManager.Authorization;
 using TaskManager.Data;
 using TaskManager.Models;
@@ -52,13 +48,13 @@ namespace TaskManager.Pages.Projects.Members
             if (!isAuthorized.Succeeded)
             {
                 if (isAuthorized2 == false)
-                    {
-                        return Forbid();
-                    }
+                {
+                    return Forbid();
                 }
+            }
             //------------
-            
-            
+
+
 
             if (Member == null)
             {

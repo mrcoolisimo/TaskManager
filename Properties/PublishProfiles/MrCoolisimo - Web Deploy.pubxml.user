@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAhLV8wTX6HEONcNXEq4VMBgAAAAACAAAAAAAQZgAAAAEAACAAAAAQuIb0sJi4L+Uon0X8g8y0/MyjUniEhV4c0T8FSsp6AwAAAAAOgAAAAAIAACAAAABF1MzlpV0VR8y+Cwv9xxF7MYzim7YxOuR44VOfZbhyF4AAAACa6aYyfMUBcaJy65HaR++i5p3K0AY04t40kFf42ZQhEgQn8gbiZM92P/ITWGZzPBYSkNrMFyZIrXs9nHfau02HEAdaAXQyXe5q1aL8UwSf6CXxMkvg8lhegsXILW6tumqAL6jGNuuPf2fKN4S8c3eQA9sEgAOxBErrEtXsEGUllEAAAACrOWoqb+JENq72acpNYLBHdyAaDYGOpwXyMHazL+3kG5o6nHeeca0hv49hEF3/4GGE9/A6SOhVHXqSnj5RtUIC</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <EFMigrations Include="TaskManager.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:mrcoolisimodbserver.database.windows.net,1433%3bInitial Catalog=MrCoolisimo_db%3bUser Id=the5secondninja%40gmail.com%40mrcoolisimodbserver%3bPassword=Mansell9378</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

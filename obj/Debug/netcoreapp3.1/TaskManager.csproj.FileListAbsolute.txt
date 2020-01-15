@@ -169,3 +169,4 @@ C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\Razor\Pages\Projects\Members\Delete.cshtml.g.cs
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\Razor\Pages\Projects\Members\Details.cshtml.g.cs
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\Razor\Pages\Projects\Members\Edit.cshtml.g.cs
+C:\Users\Liam York\source\repos\TaskManager\TaskManager\bin\Debug\netcoreapp3.1\SendGrid.dll

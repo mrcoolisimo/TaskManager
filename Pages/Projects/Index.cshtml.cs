@@ -1,12 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 using TaskManager.Data;
 using TaskManager.Models;
 
@@ -37,7 +34,7 @@ namespace TaskManager.Pages.Projects
             var projects = from p in Context.Project select p;
             var currentUserId = UserManager.GetUserId(User);
             projects = projects.Where(p => p.OwnerID == currentUserId);
-            
+
             //Find all affiliated projects
             var members = from m in Context.Member select m;
             var currentUserEmail = UserManager.GetUserName(User);

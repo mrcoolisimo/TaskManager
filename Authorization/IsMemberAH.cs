@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TaskManager.Models;
 
@@ -24,7 +21,7 @@ namespace TaskManager.Authorization
 								Member resource)
 		{
 
-			
+
 
 			//If no user or resource
 			if (context.User == null || resource == null)

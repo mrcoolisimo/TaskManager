@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using TaskManager.Authorization;
 using TaskManager.Data;
 using TaskManager.Models;
@@ -71,7 +68,7 @@ namespace TaskManager.Pages.Projects.Taskings
             }
             //------------
 
-            
+
 
             ViewData["Members"] = new SelectList(Context.Set<Member>().Where(m => m.ProjectID == Tasking.ProjectID), "Email", "Email");
             ViewData["ProjectID"] = Tasking.ProjectID;
