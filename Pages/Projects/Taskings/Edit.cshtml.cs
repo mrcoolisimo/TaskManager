@@ -36,6 +36,10 @@ namespace TaskManager.Pages.Projects.Taskings
                 .Include(m => m.Members)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
+            var members = await Context.Member.FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
+            var member = await Context.Member.Where(m => m.Email == UserManager.GetUserName(User)).FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
+
+
 
             if (Tasking == null)
             {
@@ -57,13 +61,17 @@ namespace TaskManager.Pages.Projects.Taskings
                     //Do you not own this task?
                     if (Tasking.TaskOwnerName != User.Identity.Name)
                     {
-                        return Forbid();
+                        //If youre not elevated
+                        if (member.IsOwner != 2)
+                        {
+                            return Forbid();
+                        }
                     }
                 }
             }
             //------------
 
-            var members = await Context.Member.FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
+            
 
             ViewData["Members"] = new SelectList(Context.Set<Member>().Where(m => m.ProjectID == Tasking.ProjectID), "Email", "Email");
             ViewData["ProjectID"] = Tasking.ProjectID;
@@ -79,18 +87,22 @@ namespace TaskManager.Pages.Projects.Taskings
             {
                 return Page();
             }
-            Tasking = await Context.Tasking
-                .Include(t => t.Project).FirstOrDefaultAsync(m => m.TaskingID == id);
+            var tasking = await Context
+               .Tasking.Include(t => t.Project).AsNoTracking()
+               .FirstOrDefaultAsync(p => p.TaskingID == id);
             var project = await Context.Project
                 .Include(t => t.Tasks)
                 .Include(m => m.Members)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
+                .FirstOrDefaultAsync(m => m.ProjectID == tasking.ProjectID);
+            var member = await Context.Member
+                .Where(m => m.Email == UserManager.GetUserName(User))
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ProjectID == tasking.ProjectID);
             //Authorization!
             var isAuthorized2 = await AuthorizationService.AuthorizeAsync(
                                                      User, project,
                                                      Operations.Update);
-
             if (!isAuthorized2.Succeeded)
             {
                 return Forbid();
@@ -102,14 +114,15 @@ namespace TaskManager.Pages.Projects.Taskings
                     //Do you not own this task?
                     if (Tasking.TaskOwnerName != User.Identity.Name)
                     {
-                        return Forbid();
+                        //If youre not elevated
+                        if (member.IsOwner != 2)
+                        {
+                            return Forbid();
+                        }
                     }
                 }
             }
             //------------
-            var tasking = await Context
-                .Tasking.Include(p => p.Project).AsNoTracking()
-                .FirstOrDefaultAsync(p => p.TaskingID == id);
 
             Tasking.TaskingID = tasking.TaskingID;
             Tasking.ProjectID = tasking.ProjectID;

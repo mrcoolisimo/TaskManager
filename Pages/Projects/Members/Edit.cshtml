@@ -13,18 +13,10 @@
     <form method="post">
         <div class="subform-ylw">
             <div class="form-group">
-                @Html.DisplayFor(model => model.Member.MemberID)
-            </div>
-            <div class="form-group">
-                <label class="control-label">Email</label>
-                <input asp-for="Member.Email" class="form-control" />
-                <span asp-validation-for="Member.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 Role
-                <select asp-for="Member.isOwner">
-                    <option value="2">Elevated</option>
+                <select asp-for="Member.IsOwner">
                     <option value="0">Member</option>
+                    <option value="2">Elevated</option>
                 </select>
             </div>
         </div>
@@ -33,7 +25,7 @@
         </div>
     </form>
     <div class="sizing sub-back">
-        <a class="my-btn3-back" asp-page="./Details" asp-route-id="@Model.Member.MemberID">Back to Information Page</a>
+        <a class="my-btn3-back" asp-page="./Details" asp-route-id=@Model.Member.MemberID>Back to Information Page</a>
     </div>
 </div>
 <br />

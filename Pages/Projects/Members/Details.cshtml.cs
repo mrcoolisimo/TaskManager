@@ -32,6 +32,13 @@ namespace TaskManager.Pages.Projects.Members
             Project = await Context.Project
                 .Include(t => t.Tasks)
                 .FirstOrDefaultAsync(p => p.ProjectID == Member.ProjectID);
+            var MyRole = await Context.Member
+                .Include(m => m.Project)
+                .AsNoTracking()
+                .Where(m => m.ProjectID == Project.ProjectID)
+                .FirstOrDefaultAsync(m => m.Email == User.Identity.Name);
+            ViewData["MyRole"] = MyRole.IsOwner;
+
             //Owner Authorization!
             var project = await Context
                 //Include permitted roles

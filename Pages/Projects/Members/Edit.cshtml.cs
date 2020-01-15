@@ -25,7 +25,7 @@ namespace TaskManager.Pages.Projects.Members
 
         [BindProperty]
         public Member Member { get; set; }
-        public Project Project { get; set; }
+        //public Project Project { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -33,14 +33,19 @@ namespace TaskManager.Pages.Projects.Members
             Member = await Context.Member
                 .Include(m => m.Project)
                 .FirstOrDefaultAsync(m => m.MemberID == id);
-            Project = await Context.Project
+            var project = await Context.Project
                 .Include(m => m.Members)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ProjectID == Member.ProjectID);
+            var MyRole = await Context.Member
+                .Include(m => m.Project)
+                .AsNoTracking()
+                .Where(m => m.ProjectID == project.ProjectID)
+                .FirstOrDefaultAsync(m => m.Email == User.Identity.Name);
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, Project,
+                                                     User, project,
                                                      Operations.Update);
-            if (!isAuthorized.Succeeded)
+            if (!isAuthorized.Succeeded || MyRole.IsOwner != 1)
             {
                 return Forbid();
             }
@@ -64,20 +69,23 @@ namespace TaskManager.Pages.Projects.Members
             }
             var member = await Context.Member
                 .Include(m => m.Project)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.MemberID == id);
 
             //Owner Authorization!
-            Member = await Context.Member
-                .Include(m => m.Project)
-                .FirstOrDefaultAsync(m => m.MemberID == id);
-            Project = await Context.Project
+            var project = await Context.Project
                 .Include(m => m.Members)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ProjectID == Member.ProjectID);
+                .FirstOrDefaultAsync(m => m.ProjectID == member.ProjectID);
+            var MyRole = await Context.Member
+                .Include(m => m.Project)
+                .AsNoTracking()
+                .Where(m => m.ProjectID == project.ProjectID)
+                .FirstOrDefaultAsync(m => m.Email == User.Identity.Name);
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, Project,
+                                                     User, project,
                                                      Operations.Update);
-            if (!isAuthorized.Succeeded)
+            if (!isAuthorized.Succeeded || MyRole.IsOwner != 1)
             {
                 return Forbid();
             }
@@ -86,7 +94,7 @@ namespace TaskManager.Pages.Projects.Members
             Member.MemberID = member.MemberID; 
             Member.ProjectID = member.ProjectID;
             Member.ProjectName = member.ProjectName;
-            //Member.Email = member.Email;
+            Member.Email = member.Email;
             Context.Attach(Member).State = EntityState.Modified;
 
             try

@@ -11,7 +11,7 @@ namespace TaskManager.Models
 		public int ProjectID { get; set; }
 		public string ProjectName { get; set; }
 		public string Email { get; set; }
-		public int isOwner { get; set; }
+		public int IsOwner { get; set; }
 
 		public Project Project { get; set; }
 	}

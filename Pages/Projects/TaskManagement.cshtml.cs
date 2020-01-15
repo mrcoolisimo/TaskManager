@@ -101,7 +101,7 @@ namespace TaskManager.Pages.Projects
             Member.ProjectID = id;
             Member.ProjectName = project.Title;
             Member.Email = project.Owner;
-            Member.isOwner = 1;
+            Member.IsOwner = 1;
             Context.Member.Add(Member);
             await Context.SaveChangesAsync();
             

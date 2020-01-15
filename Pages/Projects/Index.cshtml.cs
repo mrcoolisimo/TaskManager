@@ -42,7 +42,7 @@ namespace TaskManager.Pages.Projects
             var members = from m in Context.Member select m;
             var currentUserEmail = UserManager.GetUserName(User);
             members = members.Where(m => m.Email == currentUserEmail);
-            members = members.Where(m => m.isOwner != 1);
+            members = members.Where(m => m.IsOwner != 1);
 
             //Output
             Project = await projects.ToListAsync();

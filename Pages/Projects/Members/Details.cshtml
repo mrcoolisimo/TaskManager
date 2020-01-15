@@ -113,27 +113,35 @@
 </div>
 <hr />
 <div class="subcol narrow">
-    <a class="" asp-page="./Edit" asp-route-id=@Model.Member.MemberID><i class="fas fa-edit float-right icon-transition"></i></a>
+    
     <div class="subform-ylw">
-
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Member.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Member.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Member.isOwner)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Member.isOwner)
-        </dd>
+        @if (@ViewBag.MyRole == 1) 
+        { 
+        <a class="" asp-page="./Edit" asp-route-id=@Model.Member.MemberID><i class="fas fa-edit float-right icon-transition"></i></a>
+        }
+        <div>
+            <strong>Email:</strong> @Html.DisplayFor(model => model.Member.Email)
+        </div>
+        <div>
+            @if (Model.Member.IsOwner == 0)
+            {
+                <div><strong>Role:</strong> Member</div>
+            }
+            @if (Model.Member.IsOwner == 1)
+            {
+                <div><strong>Role:</strong> Owner</div>
+            }
+            @if (Model.Member.IsOwner == 2)
+            {
+                <div><strong>Role:</strong> Elevated Member</div>
+            }
+        </div>
     </div>
     <!--If this is you or you are the project member-->
     @if (Model.Member.Email == User.Identity.Name || Model.Member.Project.Owner == User.Identity.Name)
     {
         <!--If this member isn't the project owner-->
-        @if (Model.Member.isOwner != 1)
+        @if (Model.Member.IsOwner != 1)
         {
             <div class="sub-mit">
                 <a class="my-btn3-dlt sizing" asp-page="./Delete" asp-route-id=@Model.Member.MemberID>Remove</a>
