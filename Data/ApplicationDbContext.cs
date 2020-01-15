@@ -15,5 +15,6 @@ namespace TaskManager.Data
 		}
 		public DbSet<TaskManager.Models.Project> Project { get; set; }
 		public DbSet<TaskManager.Models.Tasking> Tasking { get; set; }
+		public DbSet<TaskManager.Models.Member> Member { get; set; }
 	}
 }

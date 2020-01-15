@@ -9,9 +9,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-green border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">TaskManager</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><span class="blue">Task</span><span class="yellow">Manager</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,13 +35,14 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - TaskManager - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            &copy; 2020 - TaskManager
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/d3c265f2fe.js" crossorigin="anonymous"></script>
 
     @RenderSection("Scripts", required: false)
 </body>

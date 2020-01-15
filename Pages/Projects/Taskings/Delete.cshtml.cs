@@ -40,7 +40,7 @@ namespace TaskManager.Pages.Projects.Taskings
                 return NotFound();
             }
 
-            //Owner Authorization!
+            //Project Owner Authorization!
             var tasking = await Context
                 .Tasking.Include(t => t.Project).AsNoTracking()
                 .FirstOrDefaultAsync(p => p.TaskingID == id);
@@ -79,15 +79,13 @@ namespace TaskManager.Pages.Projects.Taskings
             }
             //------------
 
-            var tempid = Tasking.ProjectID;
-
             if (Tasking != null)
             {
                 Context.Tasking.Remove(Tasking);
                 await Context.SaveChangesAsync();
             }
 
-            return RedirectToPage("/Projects/Details", new { id = tempid });
+            return RedirectToPage("/Projects/TaskManagement", new { id = Tasking.ProjectID });
         }
     }
 }

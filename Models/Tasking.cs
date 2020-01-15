@@ -9,24 +9,17 @@ namespace TaskManager.Models
 	{
 		public int TaskingID { get; set; }
 		public int ProjectID { get; set; }
+		public string TaskOwner { get; set; }
+		public string TaskOwnerName { get; set; }
+
+		public string TaskTitle { get; set; }
 		public string Description { get; set; }
-		public Severity? Severity { get; set; }
-		public Progression? Progression { get; set; }
+		public int Severity { get; set; }
+		public int Progression { get; set; }
+		public string Assignment { get; set; }
 
 		public Project Project { get; set; }
-	}
-
-	public enum Severity
-	{
-		Low,
-		Medium,
-		High
-	}
-	public enum Progression
-	{
-		Initial,
-		Started,
-		Complete
+		public Member Member { get; set; }
 	}
 }
 

@@ -22,6 +22,7 @@ namespace TaskManager.Pages.Projects
         }
 
         public IList<Project> Project { get; set; }
+        public IList<Member> Member { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -34,15 +35,18 @@ namespace TaskManager.Pages.Projects
 
             //Find all projects in our DB
             var projects = from p in Context.Project select p;
-
             var currentUserId = UserManager.GetUserId(User);
-
             projects = projects.Where(p => p.OwnerID == currentUserId);
+            
+            //Find all affiliated projects
+            var members = from m in Context.Member select m;
+            var currentUserEmail = UserManager.GetUserName(User);
+            members = members.Where(m => m.Email == currentUserEmail);
+            members = members.Where(m => m.isOwner != 1);
 
-
-            var loggedIn = UserManager.GetUserId(User) != null ? true : false;
-
+            //Output
             Project = await projects.ToListAsync();
+            Member = await members.ToListAsync();
         }
     }
 }

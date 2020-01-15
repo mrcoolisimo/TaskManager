@@ -26,27 +26,19 @@ namespace TaskManager.Pages.Projects.Taskings
         public Project Project { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
-        { 
-            if (id == null)
+        {
+            var project = await Context
+                   .Project.Include(m => m.Members).AsNoTracking()
+                   .FirstOrDefaultAsync(p => p.ProjectID == id);
+            if (project == null)
             {
                 return NotFound();
             }
-
-            Project = await Context.Project
-                .FirstOrDefaultAsync(m => m.ProjectID == id);
-
-            if (Project == null)
-            {
-                return NotFound();
-            }
-
-            //Owner Authorization!
-            var tasking = await Context
-                .Tasking.Include(t => t.Project).AsNoTracking()
-                .FirstOrDefaultAsync(p => p.TaskingID == id);
+            
+            //Owner Authorization!     
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, tasking,
-                                                     Operations.Delete);
+                                                     User, project,
+                                                     Operations.Create);
             if (!isAuthorized.Succeeded)
             {
                 return Forbid();
@@ -70,22 +62,26 @@ namespace TaskManager.Pages.Projects.Taskings
             }
 
             //Owner Authorization!
-            var tasking = await Context
-                .Tasking.Include(t => t.Project).AsNoTracking()
-                .FirstOrDefaultAsync(p => p.TaskingID == id);
+            var project = await Context
+                .Project
+                .Include(m => m.Members)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.ProjectID == id);
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, tasking,
-                                                     Operations.Delete);
+                                                     User, project,
+                                                     Operations.Create);
             if (!isAuthorized.Succeeded)
             {
                 return Forbid();
             }
             //------------
-
+            Tasking.ProjectID = id;
+            Tasking.TaskOwner = UserManager.GetUserId(User);
+            Tasking.TaskOwnerName = UserManager.GetUserName(User);
             Context.Tasking.Add(Tasking);
             await Context.SaveChangesAsync();
 
-            return RedirectToPage("/Projects/Details", new { id = id });
+            return RedirectToPage("/Projects/TaskManagement", new { id = id });
         }
     }
 }

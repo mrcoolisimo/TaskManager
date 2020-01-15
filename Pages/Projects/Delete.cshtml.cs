@@ -25,7 +25,7 @@ namespace TaskManager.Pages.Projects
         [BindProperty]
         public Project Project { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             if (!User.Identity.IsAuthenticated)
             {
@@ -33,12 +33,7 @@ namespace TaskManager.Pages.Projects
                 Response.Redirect("/Identity/Account/Login");
             }
 
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            Project = await Context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
+            Project = await Context.Project.AsNoTracking().FirstOrDefaultAsync(m => m.ProjectID == id);
 
             if (Project == null)
             {
@@ -46,11 +41,8 @@ namespace TaskManager.Pages.Projects
             }
 
             //Owner Authorization!
-            var project = await Context
-                .Project.AsNoTracking()
-                .FirstOrDefaultAsync(p => p.ProjectID == id);
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, project,
+                                                     User, Project,
                                                      Operations.Update);
             if (!isAuthorized.Succeeded)
             {
@@ -61,12 +53,8 @@ namespace TaskManager.Pages.Projects
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             //Owner Authorization!
             var project = await Context
@@ -88,8 +76,6 @@ namespace TaskManager.Pages.Projects
                 Context.Project.Remove(Project);
                 await Context.SaveChangesAsync();
             }
-
-            
 
             return RedirectToPage("./Index");
         }

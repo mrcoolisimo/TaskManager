@@ -13,5 +13,6 @@ namespace TaskManager.Models
 		public string Title { get; set; }
 
 		public ICollection<Tasking> Tasks { get; set; }
+		public ICollection<Member> Members { get; set; }
 	}
 }

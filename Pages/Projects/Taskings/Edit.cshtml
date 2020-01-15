@@ -5,45 +5,52 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Tasking</h4>
+<h4 class="center">Edit Task</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Tasking.TaskingID" />
+<div class="subcol narrow">
+    <form method="post">
+        <div class="subform-ylw">
             <div class="form-group">
-                <label asp-for="Tasking.ProjectID" class="control-label"></label>
-                <input asp-for="Tasking.ProjectID" class="form-control" value=@ViewBag.ProjectID readonly></input>
+                <label class="control-label">Title</label>
+                <input asp-for="Tasking.TaskTitle" class="form-control" />
+                <span asp-validation-for="Tasking.TaskTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tasking.Description" class="control-label"></label>
-                <input asp-for="Tasking.Description" class="form-control" />
+                <textarea asp-for="Tasking.Description" class="form-control"></textarea>
                 <span asp-validation-for="Tasking.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tasking.Severity" class="control-label"></label>
-                <input asp-for="Tasking.Severity" class="form-control" />
-                <span asp-validation-for="Tasking.Severity" class="text-danger"></span>
+                Severity
+                <select asp-for="Tasking.Severity">
+                    <option value="0">Low</option>
+                    <option value="1">Medium</option>
+                    <option value="2">High</option>
+                </select>
             </div>
             <div class="form-group">
-                <label asp-for="Tasking.Progression" class="control-label"></label>
-                <input asp-for="Tasking.Progression" class="form-control" />
-                <span asp-validation-for="Tasking.Progression" class="text-danger"></span>
+                Progression
+                <select asp-for="Tasking.Progression">
+                    <option value="0">Created</option>
+                    <option value="1">In Progress</option>
+                    <option value="2">Completed</option>
+                </select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label class="control-label">Assign To</label>
+                <select asp-for="Tasking.Assignment" asp-items="ViewBag.Members"></select>
             </div>
-        </form>
+        </div>
+        <div class="sub-mit">
+            <input type="submit" value="Save" class="my-btn3 sizing" />
+        </div>
+    </form>
+    <div class="sizing sub-back">
+        <a class="my-btn3-back" asp-page="./Details" asp-route-id="@Model.Tasking.TaskingID">Back to Information Page</a>
     </div>
 </div>
+<br /><br /><br />
 
-<div>
-    <a asp-page="./Details" asp-route-id=@ViewBag.TaskingID>Back to Item Page</a> | 
-    <a asp-page="/Projects/Details" asp-route-id=@ViewBag.ProjectID>Back to Project Page</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

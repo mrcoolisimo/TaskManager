@@ -1,0 +1,151 @@
+﻿@page
+@model TaskManager.Pages.Projects.Members.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class="center">@Html.DisplayFor(model => model.Member.Email)</h2>
+<h5 class="center grey">@Html.DisplayFor(model => model.Project.Title)</h5>
+<br /><br />
+<div class="my-wrapper">
+
+    <div class="my-col sizing">
+        <div class="lr-bg">New</div>
+        @foreach (var item in Model.Project.Tasks)
+        {
+            if (item.Assignment == Model.Member.Email)
+            {
+
+                @if (item.Progression == 0)
+                {
+                    if (item.Severity == 0)
+                    {
+                        <a class="alt-row-red link-pad txt-red cutoff" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-empty red-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                    if (item.Severity == 1)
+                    {
+                        <a class="alt-row-red link-pad txt-red" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-half red-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                    if (item.Severity == 2)
+                    {
+                        <a class="alt-row-red link-pad txt-red cutoff" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-full red-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                }
+            }
+        }
+    </div>
+    <div class="my-col sizing">
+        <div class="ly-bg">In Progress</div>
+        @foreach (var item in Model.Project.Tasks)
+        {
+            if (item.Assignment == Model.Member.Email)
+            {
+                if (item.Progression == 1)
+                {
+                    if (item.Severity == 0)
+                    {
+                        <a class="alt-row-ylw link-pad txt-ylw" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-empty ylw-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                    if (item.Severity == 1)
+                    {
+                        <a class="alt-row-ylw link-pad txt-ylw" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-half ylw-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                    if (item.Severity == 2)
+                    {
+                        <a class="alt-row-ylw link-pad txt-ylw" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-full ylw-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                }
+            }
+        }
+    </div>
+    <div class="my-col sizing">
+        <div class="lg-bg">Completed</div>
+        @foreach (var item in Model.Project.Tasks)
+        {
+            if (item.Assignment == Model.Member.Email)
+            {
+                @if (item.Progression == 2)
+                {
+                    if (item.Severity == 0)
+                    {
+                        <a class="alt-row-grn link-pad txt-grn" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-empty grn-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                    if (item.Severity == 1)
+                    {
+                        <a class="alt-row-grn link-pad txt-grn" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-half grn-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                    if (item.Severity == 2)
+                    {
+                        <a class="alt-row-grn link-pad txt-grn" asp-page="/Projects/Taskings/Details" asp-route-id=@item.TaskingID>
+                            <i class="fas fa-battery-full grn-icon"></i>
+                            @Html.DisplayFor(modelitem => item.TaskTitle)
+                        </a>
+                    }
+                }
+            }
+        }
+    </div>
+</div>
+<hr />
+<div class="subcol narrow">
+    <a class="" asp-page="./Edit" asp-route-id=@Model.Member.MemberID><i class="fas fa-edit float-right icon-transition"></i></a>
+    <div class="subform-ylw">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Member.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Member.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Member.isOwner)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Member.isOwner)
+        </dd>
+    </div>
+    <!--If this is you or you are the project member-->
+    @if (Model.Member.Email == User.Identity.Name || Model.Member.Project.Owner == User.Identity.Name)
+    {
+        <!--If this member isn't the project owner-->
+        @if (Model.Member.isOwner != 1)
+        {
+            <div class="sub-mit">
+                <a class="my-btn3-dlt sizing" asp-page="./Delete" asp-route-id=@Model.Member.MemberID>Remove</a>
+            </div>
+        }
+    }
+    <div class="sizing sub-back">
+        <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@Model.Member.ProjectID>Back to Project Page</a>
+    </div>
+
+    <br />    <br />    <br />
+
+    <hr />
+
+</div>

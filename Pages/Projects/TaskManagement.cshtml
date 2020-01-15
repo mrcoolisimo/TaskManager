@@ -1,0 +1,146 @@
+﻿@page
+@model TaskManager.Pages.Projects.TaskManagementModel
+
+@{
+    ViewData["Title"] = "TaskManagement";
+}
+
+<h2 class="center">@Html.DisplayFor(model => model.Project.Title)</h2>
+<br />
+<a class="floatright" asp-page="/Projects/Details" asp-route-id="@Model.Project.ProjectID"><i class="fas fa-cog icon-transition"></i></a>
+<div class="center">
+    <h4 class="center2">Task Room</h4>
+
+</div>
+<hr />
+<a class="my-btn3 sizing" asp-page="./Taskings/Create" asp-route-id="@Model.Project.ProjectID">Add</a>
+<div class="my-wrapper">
+
+    <div class="my-col sizing">
+        <div class="lr-bg">New</div>
+        @foreach (var item in Model.Project.Tasks)
+        {
+
+            @if (item.Progression == 0)
+            {
+                if (item.Severity == 0)
+                {
+                    <a class="alt-row-red link-pad txt-red cutoff" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-empty red-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+                if (item.Severity == 1)
+                {
+                    <a class="alt-row-red link-pad txt-red" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-half red-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+                if (item.Severity == 2)
+                {
+                    <a class="alt-row-red link-pad txt-red cutoff" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-full red-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+            }
+        }
+    </div>
+    <div class="my-col sizing">
+        <div class="ly-bg">In Progress</div>
+        @foreach (var item in Model.Project.Tasks)
+        {
+            if (item.Progression == 1)
+            {
+                if (item.Severity == 0)
+                {
+                    <a class="alt-row-ylw link-pad txt-ylw" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-empty ylw-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+                if (item.Severity == 1)
+                {
+                    <a class="alt-row-ylw link-pad txt-ylw" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-half ylw-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+                if (item.Severity == 2)
+                {
+                    <a class="alt-row-ylw link-pad txt-ylw" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-full ylw-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+            }
+        }
+    </div>
+    <div class="my-col sizing">
+        <div class="lg-bg">Completed</div>
+        @foreach (var item in Model.Project.Tasks)
+        {
+            @if (item.Progression == 2)
+            {
+                if (item.Severity == 0)
+                {
+                    <a class="alt-row-grn link-pad txt-grn" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-empty grn-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+                if (item.Severity == 1)
+                {
+                    <a class="alt-row-grn link-pad txt-grn" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-half grn-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+                if (item.Severity == 2)
+                {
+                    <a class="alt-row-grn link-pad txt-grn" asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>
+                        <i class="fas fa-battery-full grn-icon"></i>
+                        @Html.DisplayFor(modelitem => item.TaskTitle)
+                    </a>
+                }
+            }
+        }
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+
+<h4 class="center">Members</h4>
+<hr />
+
+@if (@ViewBag.HasMembers == false)
+{
+    <form method="post">
+        <input type="submit" value="Initialize" class="my-btn3 sizing" />
+    </form>
+}
+@if (ViewBag.HasMembers == true)
+{
+    <a class="my-btn3 sizing" asp-page="./Members/Create" asp-route-id="@Model.Project.ProjectID">Add</a>
+}
+<div class="my-row">
+    @foreach (var item in Model.Project.Members)
+    {
+
+        <a class="my-list link-pad" asp-page="./Members/Details" asp-route-id=@item.MemberID>
+            @if (item.Email == Model.Project.Owner)
+            {
+                <i class="fas fa-chess-king grey-icon floatleft"></i>
+            }
+            else
+            {
+                <i class="fas fa-chess-pawn grey-icon floatleft"></i>
+            }
+
+            <div class="chlimit"> @Html.DisplayFor(modelitem => item.Email)</div>
+        </a>
+    }
+</div>

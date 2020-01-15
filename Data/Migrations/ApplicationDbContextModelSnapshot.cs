@@ -219,6 +219,32 @@ namespace TaskManager.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("TaskManager.Models.Member", b =>
+                {
+                    b.Property<int>("MemberID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProjectID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProjectName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("isOwner")
+                        .HasColumnType("int");
+
+                    b.HasKey("MemberID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("Member");
+                });
+
             modelBuilder.Entity("TaskManager.Models.Project", b =>
                 {
                     b.Property<int>("ProjectID")
@@ -247,19 +273,36 @@ namespace TaskManager.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Assignment")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Progression")
+                    b.Property<int?>("MemberID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Progression")
                         .HasColumnType("int");
 
                     b.Property<int>("ProjectID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Severity")
+                    b.Property<int>("Severity")
                         .HasColumnType("int");
 
+                    b.Property<string>("TaskOwner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaskOwnerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaskTitle")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("TaskingID");
+
+                    b.HasIndex("MemberID");
 
                     b.HasIndex("ProjectID");
 
@@ -317,8 +360,21 @@ namespace TaskManager.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TaskManager.Models.Member", b =>
+                {
+                    b.HasOne("TaskManager.Models.Project", "Project")
+                        .WithMany("Members")
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("TaskManager.Models.Tasking", b =>
                 {
+                    b.HasOne("TaskManager.Models.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberID");
+
                     b.HasOne("TaskManager.Models.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectID")

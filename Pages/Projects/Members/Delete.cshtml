@@ -1,0 +1,42 @@
+﻿@page
+@model TaskManager.Pages.Projects.Members.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@if (Model.Member.isOwner == 1)
+{
+    <h2>You can't remove the Project Owner, genius.</h2>
+    <br /><br /><br />
+    <div class="sizing sub-back">
+        <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@Model.Member.ProjectID>Back to Project Page</a>
+    </div>
+}
+else
+{
+    <h2 class="center">Are You Sure You Want to Remove This Member?</h2>
+    <hr />
+    <div class="subcol narrow">
+        <div class="subform-red">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Member.Email)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Member.Email)
+            </dd>
+        </div>
+        <form method="post">
+            <input type="hidden" asp-for="Member.MemberID" />
+            <div class="sub-mit">
+                <input class="my-btn3-dlt sizing" type="submit" value="Remove" />
+            </div>
+        </form>
+        <div class="sizing sub-back">
+            <a class="my-btn3-back" asp-page="/Projects/Members/Details" asp-route-id=@Model.Member.MemberID>Back to Information Page</a>
+        </div>
+    </div>
+}
+<br />
+<br />
+<br />

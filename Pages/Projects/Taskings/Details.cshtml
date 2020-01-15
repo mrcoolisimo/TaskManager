@@ -5,40 +5,53 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2 class="center">Task Information</h2>
+<div>
+    <div class="subcol narrow">
+        <div class="subform-ylw">
+            <a class="" asp-page="./Edit" asp-route-id=@Model.Tasking.TaskingID><i class="fas fa-edit float-right icon-transition"></i></a>
+            <h4 class="center">@Html.DisplayFor(model => model.Tasking.TaskTitle)</h4>
+            <p class="center grey small">Created By @Html.DisplayFor(modelitem => Model.Tasking.TaskOwnerName)</p>
+            <hr />
+            <div class="center3 large">
+                "@Html.DisplayFor(model => model.Tasking.Description)"
+            </div>
+            <br />
+            @if (Model.Tasking.Severity == 0)
+            {
+                <div><strong>Severity:</strong> Low <i class="fas fa-battery-empty grey-icon"></i></div>
+            }
+            @if (Model.Tasking.Severity == 1)
+            {
+                <div><strong>Severity:</strong> Medium <i class="fas fa-battery-half grey-icon"></i></div>
+            }
+            @if (Model.Tasking.Severity == 2)
+            {
+                <div><strong>Severity:</strong> High <i class="fas fa-battery-full grey-icon"></i></div>
+            }
 
-<div>
-    <h4>Tasking</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tasking.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tasking.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tasking.Severity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tasking.Severity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tasking.Progression)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tasking.Progression)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Tasking.Project)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Tasking.Project.ProjectID)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Tasking.TaskingID">Edit</a> |
-    <a asp-page="./Delete" asp-route-id="@Model.Tasking.TaskingID">Delete</a> |
-    <a asp-page="/Projects/Details" asp-route-id=@Model.Tasking.ProjectID>Back to Project Page</a>
-</div>
+            @if (Model.Tasking.Progression == 0)
+            {
+                <div><strong>Progression:</strong> Created</div>
+            }
+            @if (Model.Tasking.Progression == 1)
+            {
+                <div><strong>Progression:</strong> In Progress</div>
+            }
+            @if (Model.Tasking.Progression == 2)
+            {
+                <div><strong>Progression:</strong> Completed</div>
+            }
+            <br />
+        <div class="grey center small">Assigned To @Html.DisplayFor(model => model.Tasking.Assignment)</div>
+        </div>
+        <div class="sub-mit">
+            <a class="my-btn3-dlt sizing" asp-page="./Delete" asp-route-id=@Model.Tasking.TaskingID>Delete</a>
+        </div>
+        <div class="sizing sub-back">
+            <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@Model.Tasking.ProjectID>Back to Project Page</a>
+        </div>
+    </div>
+    <br /> <br /> <br />
+
+

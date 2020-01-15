@@ -30,10 +30,10 @@ namespace TaskManager.Pages.Projects
         public async Task<IActionResult> OnGetAsync(int id)
         {
 
-            if (id == null)
+            /*if (id == null)
             {
                 return NotFound();
-            }
+            }*/
 
             Project = await Context.Project.FirstOrDefaultAsync(m => m.ProjectID == id);
 
@@ -44,7 +44,8 @@ namespace TaskManager.Pages.Projects
 
             //Owner Authorization!
             var project = await Context
-                .Project.AsNoTracking()
+                .Project
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.ProjectID == id);
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                      User, project,
@@ -64,11 +65,12 @@ namespace TaskManager.Pages.Projects
         public async Task<IActionResult> OnPostAsync(int id)
         {
             //Check if they logged in
+            /*
             if (!User.Identity.IsAuthenticated)
             {
                 //They are not authenticated - send them away
                 return Forbid();
-            }
+            }*/
 
             if (!ModelState.IsValid)
             {
@@ -77,7 +79,8 @@ namespace TaskManager.Pages.Projects
 
             // Fetch Contact from DB to get OwnerID.
             var project = await Context
-                .Project.AsNoTracking()
+                .Project
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.ProjectID == id);
 
             if (project == null)

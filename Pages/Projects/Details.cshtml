@@ -5,36 +5,19 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h2 class="center">Project Information</h2>
+<hr />
 
-<div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Owner)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Owner)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Title)
-        </dd>
-    </dl>
-    <dl class="row">
-        @foreach (var item in Model.Project.Tasks)
-        {
-            <dd>
-                <a asp-page="./Taskings/Details" asp-route-id=@item.TaskingID>@Html.DisplayFor(modelitem => item.Description)</a>
-            </dd>
-        }
-    </dl>
-</div>
-<div>
-    <a asp-page="./Taskings/Create" asp-route-id="@Model.Project.ProjectID">Add Bug</a> | 
-    <a asp-page="./Edit" asp-route-id="@Model.Project.ProjectID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="subcol narrow">
+    <div class="subform-ylw">
+        <h4 class="center">@Model.Project.Title</h4>
+
+        <p>Owned By: @Html.DisplayFor(model => model.Project.Owner)</p>
+    </div>
+    <div class="sub-mit">
+        <a class="my-btn3-dlt sizing" asp-page="/Projects/Delete" asp-route-id=@Model.Project.ProjectID>Delete</a>
+    </div>
+    <div class="sizing sub-back">
+        <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@Model.Project.ProjectID>Back to Project Page</a>
+    </div>
 </div>

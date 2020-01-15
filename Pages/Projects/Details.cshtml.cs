@@ -28,11 +28,13 @@ namespace TaskManager.Pages.Projects
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             //Owner Authorization!
-            var project = await Context
-                .Project.AsNoTracking()
-                .FirstOrDefaultAsync(p => p.ProjectID == id);
+            Project = await Context.Project
+            .Include(t => t.Tasks)
+            .Include(m => m.Members)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(m => m.ProjectID == id);
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, project,
+                                                     User, Project,
                                                      Operations.Update);
             if (!isAuthorized.Succeeded)
             {
@@ -44,12 +46,6 @@ namespace TaskManager.Pages.Projects
             {
                 return NotFound();
             }
-
-            Project = await Context.Project
-                .Include(t => t.Tasks)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ProjectID == id);
-
             if (Project == null)
             {
                 return NotFound();

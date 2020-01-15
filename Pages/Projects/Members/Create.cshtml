@@ -1,0 +1,32 @@
+﻿@page
+@model TaskManager.Pages.Projects.Members.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4 class="center">Add Member</h4>
+<hr />
+<div class="subcol narrow">
+        <form method="post">
+            <div class="subform">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Member.Email" class="control-label"></label>
+                    <input asp-for="Member.Email" class="form-control" />
+                    <span asp-validation-for="Member.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="sub-mit">
+                <input type="submit" value="Create" class="my-btn3 sizing" />
+            </div>
+        </form>
+        <div class="sizing sub-back">
+            <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@ViewBag.ProjectID>Back to Project Page</a>
+        </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

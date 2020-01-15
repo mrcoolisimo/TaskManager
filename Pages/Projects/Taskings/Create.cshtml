@@ -5,21 +5,21 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Tasking</h4>
+<h4 class="center">Add Task</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+    <div class="subcol">
+    </div>
+    <form method="post">
+        <div class="subform">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Tasking.ProjectID" class="control-label"></label>
-                <input asp-for="Tasking.ProjectID" class ="form-control" value=@ViewBag.ProjectID readonly></input>
+                <label asp-for="Tasking.TaskTitle" class="control-label"></label>
+                <input asp-for="Tasking.TaskTitle" class="form-control" />
+                <span asp-validation-for="Tasking.TaskTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tasking.Description" class="control-label"></label>
-                <input asp-for="Tasking.Description" class="form-control" />
+                <textarea asp-for="Tasking.Description" class="form-control"></textarea>
                 <span asp-validation-for="Tasking.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,17 +35,17 @@
                     <option value="1">In Progress</option>
                     <option value="2">Completed</option>
                 </select>
+        </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-</form>
-    </div>
+        <div class="sub-mit">
+            <input type="submit" value="Create" class="my-btn3 sizing" />
+        </div>
+    </form>
+<div class="sizing sub-back">
+    <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@ViewBag.ProjectID>Back to Project Page</a>
 </div>
-
-<div>
-    <a asp-page="/Projects/Details" asp-route-id=@ViewBag.ProjectID>Back to Project Page</a>
 </div>
+<br /><br /><br />
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -28,32 +28,44 @@ namespace TaskManager.Pages.Projects.Taskings
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             Tasking = await Context.Tasking
                 .Include(t => t.Project).FirstOrDefaultAsync(m => m.TaskingID == id);
+            var project = await Context.Project
+                .Include(t => t.Tasks)
+                .Include(m => m.Members)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
 
             if (Tasking == null)
             {
                 return NotFound();
             }
+            //Authorization!
+            var isAuthorized2 = await AuthorizationService.AuthorizeAsync(
+                                                     User, project,
+                                                     Operations.Update);
 
-            //Owner Authorization!
-            var tasking = await Context
-                .Tasking.Include(t => t.Project).AsNoTracking()
-                .FirstOrDefaultAsync(p => p.TaskingID == id);
-            var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, tasking,
-                                                     Operations.Delete);
-            if (!isAuthorized.Succeeded)
+            if (!isAuthorized2.Succeeded)
             {
                 return Forbid();
             }
+            if (project.Owner != User.Identity.Name)
+            {
+                if (Tasking.Assignment != User.Identity.Name)
+                {
+                    //Do you not own this task?
+                    if (Tasking.TaskOwnerName != User.Identity.Name)
+                    {
+                        return Forbid();
+                    }
+                }
+            }
             //------------
 
+            var members = await Context.Member.FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
+
+            ViewData["Members"] = new SelectList(Context.Set<Member>().Where(m => m.ProjectID == Tasking.ProjectID), "Email", "Email");
             ViewData["ProjectID"] = Tasking.ProjectID;
             ViewData["TaskingID"] = Tasking.TaskingID;
             return Page();
@@ -67,20 +79,42 @@ namespace TaskManager.Pages.Projects.Taskings
             {
                 return Page();
             }
+            Tasking = await Context.Tasking
+                .Include(t => t.Project).FirstOrDefaultAsync(m => m.TaskingID == id);
+            var project = await Context.Project
+                .Include(t => t.Tasks)
+                .Include(m => m.Members)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.ProjectID == Tasking.ProjectID);
+            //Authorization!
+            var isAuthorized2 = await AuthorizationService.AuthorizeAsync(
+                                                     User, project,
+                                                     Operations.Update);
 
-            //Owner Authorization!
-            var tasking = await Context
-                .Tasking.Include(t => t.Project).AsNoTracking()
-                .FirstOrDefaultAsync(p => p.TaskingID == id);
-            var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                     User, tasking,
-                                                     Operations.Delete);
-            if (!isAuthorized.Succeeded)
+            if (!isAuthorized2.Succeeded)
             {
                 return Forbid();
             }
+            if (project.Owner != User.Identity.Name)
+            {
+                if (Tasking.Assignment != User.Identity.Name)
+                {
+                    //Do you not own this task?
+                    if (Tasking.TaskOwnerName != User.Identity.Name)
+                    {
+                        return Forbid();
+                    }
+                }
+            }
             //------------
+            var tasking = await Context
+                .Tasking.Include(p => p.Project).AsNoTracking()
+                .FirstOrDefaultAsync(p => p.TaskingID == id);
 
+            Tasking.TaskingID = tasking.TaskingID;
+            Tasking.ProjectID = tasking.ProjectID;
+            Tasking.TaskOwner = tasking.TaskOwner;
+            Tasking.TaskOwnerName = tasking.TaskOwnerName;
             Context.Attach(Tasking).State = EntityState.Modified;
 
             try
@@ -98,8 +132,7 @@ namespace TaskManager.Pages.Projects.Taskings
                     throw;
                 }
             }
-
-            return RedirectToPage("/Projects/Details", new { id = id });
+            return RedirectToPage("/Projects/Taskings/Details", new { id = Tasking.TaskingID });
         }
 
         private bool TaskingExists(int id)

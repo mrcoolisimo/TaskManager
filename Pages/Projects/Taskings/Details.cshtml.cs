@@ -26,24 +26,35 @@ namespace TaskManager.Pages.Projects.Taskings
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             Tasking = await Context.Tasking
                 .Include(t => t.Project).FirstOrDefaultAsync(m => m.TaskingID == id);
 
             //Owner Authorization!
             var tasking = await Context
-                .Tasking.Include(t => t.Project).AsNoTracking()
+                .Tasking
+                .Include(t => t.Project)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.TaskingID == id);
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                      User, tasking,
                                                      Operations.Delete);
+
+            //Member Authorization!
+            var project = await Context
+                //Include permitted roles
+                .Project.Include(m => m.Members).AsNoTracking()
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.ProjectID == tasking.ProjectID);
+            var isAuthorizedMember = await AuthorizationService.AuthorizeAsync(
+                                                     User, project,
+                                                     Operations.Update);
             if (!isAuthorized.Succeeded)
             {
-                return Forbid();
+                if (!isAuthorizedMember.Succeeded)
+                {
+                    return Forbid();
+                }
+                
             }
             //------------
 

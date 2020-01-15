@@ -30,6 +30,7 @@ namespace TaskManager.Pages.Projects
 
         [BindProperty]
         public Project Project { get; set; }
+        public Member Member { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.

@@ -5,30 +5,21 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h2 class="center">Are You Sure You Want to Delete this?</h2>
+<hr />
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Owner)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Owner)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Title)
-        </dd>
-    </dl>
-    
+<div class="subcol narrow">
+    <div class="subform-red">
+        <h4 class="center">@Model.Project.Title</h4>
+
+        <p>Owned By: @Html.DisplayFor(model => model.Project.Owner)</p>
+    </div>
     <form method="post">
-        <input type="hidden" asp-for="Project.ProjectID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <div class="sub-mit">
+            <input class="my-btn3-dlt sizing" type="submit" value="Delete" />
+        </div>
     </form>
+    <div class="sizing sub-back">
+        <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@Model.Project.ProjectID>Back to Project Page</a>
+    </div>
 </div>

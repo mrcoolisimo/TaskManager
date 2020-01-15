@@ -2,41 +2,36 @@
 @model TaskManager.Pages.Projects.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Project Collection";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<h2 class="center">Your Projects</h2>
+<a class="my-btn2" asp-page=Create>Create New</a>
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].Owner)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Project[0].Title)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
     <tbody>
-@foreach (var item in Model.Project) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Owner)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ProjectID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ProjectID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ProjectID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Project)
+        {
+
+            <tr class="alt-row-color">
+
+                <td>
+                    <a class="my-btn" asp-page="./TaskManagement" asp-route-id="@item.ProjectID">@Html.DisplayFor(modelItem => item.Title)</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br /><br /><br />
+<h2 class="center">Affiliated Projects</h2>
+<table class="table">
+    <tbody>
+        @foreach (var item in Model.Member)
+        {
+            <tr class="alt-row-color">
+                <td>
+                    <a class="my-btn" asp-page="./TaskManagement" asp-route-id="@item.ProjectID">@Html.DisplayFor(modelItem => item.ProjectName)</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
