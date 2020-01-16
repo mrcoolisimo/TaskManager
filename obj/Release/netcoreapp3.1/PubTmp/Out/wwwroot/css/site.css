@@ -47,6 +47,17 @@ html {
     .my-list {
         font-size: 11px !important;
     }
+    
+}
+@media (max-width: 480px) {
+    .center {
+        margin: auto !important;
+        width: 80% !important;
+        text-align: center;
+    }
+    .widen-mobile {
+        margin:0 !important;
+    }
 }
 
 
@@ -66,6 +77,8 @@ html {
         font-size: 1rem;
         line-height: inherit;
     }
+
+
 
     /* Sticky footer styles
 -------------------------------------------------- */
@@ -121,27 +134,36 @@ html {
         flex-basis: 100%;
         flex: 1;
     }
-.my-row {
-    display: flex;
-    flex-flow: row wrap;
-    flex-basis: 100%;
-    flex-grow: 2;
-}
+
+    .my-row {
+        display: flex;
+        flex-flow: row wrap;
+        flex-basis: 100%;
+        flex-grow: 2;
+    }
 
     .center {
         text-align: center;
-        margin:auto;
-        width:50%;
+        margin: auto;
+        width: 50%;
     }
-.center2 {
-    text-align: center;
-}
-.center3 {
-    text-align: center;
-    margin: auto;
-    width: 100%;
-    font-size:12px !important;
-}
+
+    .center2 {
+        text-align: center;
+    }
+
+    .center3 {
+        text-align: center;
+        margin: auto;
+        width: 100%;
+        font-size: 12px !important;
+    }
+
+    .center4 {
+        text-align: center;
+        margin: auto;
+        width: 100%;
+    }
 
     /*light-blue table*/
     .lb-bg {
@@ -310,16 +332,16 @@ html {
             background-color: rgb(227, 253, 136);
         }
 
-.my-btn3 {
-    padding: 4px 12px;
-    text-align: center;
-    display: inline-block;
-    text-decoration: none;
-    color: rgb(0, 162, 202);
-    background-color: rgb(153, 232, 252);
-    transition: 0.3s;
-    border: none;
-}
+    .my-btn3 {
+        padding: 4px 12px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none;
+        color: rgb(0, 162, 202);
+        background-color: rgb(153, 232, 252);
+        transition: 0.3s;
+        border: none;
+    }
 
         .my-btn3:hover {
             text-decoration: none;
@@ -327,55 +349,73 @@ html {
             background-color: rgb(194, 242, 254);
         }
 
-.my-btn3-grn {
-    padding: 4px 12px;
+    .my-btn3-grn {
+        padding: 4px 12px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none;
+        color: rgb(56, 145, 0);
+        background-color: rgb(174, 255, 72);
+        transition: 0.3s;
+        border: none;
+    }
+
+        .my-btn3-grn:hover {
+            text-decoration: none;
+            color: rgb(75, 195, 0);
+            background-color: rgb(227, 253, 136);
+        }
+
+    .my-btn3-back {
+        padding: 4px 12px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none !important;
+        color: #7e7e7e !important;
+        background-color: #d4d4d4;
+        transition: 0.3s;
+        border: none;
+    }
+
+        .my-btn3-back:hover {
+            text-decoration: none;
+            color: #9d9d9d !important;
+            background-color: #e1e1e1;
+        }
+
+    .my-btn3-dlt {
+        padding: 4px 12px;
+        text-align: center;
+        display: inline-block;
+        text-decoration: none !important;
+        color: rgb(216, 216, 216) !important;
+        background-color: #ff6868;
+        transition: 0.3s;
+        border: none;
+    }
+
+        .my-btn3-dlt:hover {
+            text-decoration: none;
+            color: #ffffff !important;
+            background-color: #ff0000;
+        }
+.my-btn4 {
+    padding: 8px 8px;
     text-align: center;
     display: inline-block;
     text-decoration: none;
-    color: rgb(56, 145, 0);
-    background-color: rgb(174, 255, 72);
+    color: rgb(0, 162, 202);
+    background-color: rgb(153, 232, 252);
     transition: 0.3s;
+    margin-right:10%;
     border: none;
 }
 
-    .my-btn3-grn:hover {
+    .my-btn4:hover {
         text-decoration: none;
-        color: rgb(75, 195, 0);
-        background-color: rgb(227, 253, 136);
+        color: rgb(97, 205, 232);
+        background-color: rgb(194, 242, 254);
     }
-.my-btn3-back {
-    padding: 4px 12px;
-    text-align: center;
-    display: inline-block;
-    text-decoration: none !important;
-    color: #7e7e7e !important;
-    background-color: #d4d4d4;
-    transition: 0.3s;
-    border: none;
-}
-
-    .my-btn3-back:hover {
-        text-decoration: none;
-        color: #9d9d9d !important;
-        background-color: #e1e1e1;
-    }
-.my-btn3-dlt {
-    padding: 4px 12px;
-    text-align: center;
-    display: inline-block;
-    text-decoration: none !important;
-    color: rgb(216, 216, 216) !important;
-    background-color: #ff6868;
-    transition: 0.3s;
-    border: none;
-}
-
-    .my-btn3-dlt:hover {
-        text-decoration: none;
-        color: #ffffff !important;
-        background-color: #ff0000;
-    }
-
     .alt-row-color:nth-child(odd) .my-btn {
         color: #6087b0;
     }
@@ -422,10 +462,11 @@ html {
         line-height: 1.5 !important;
         color: #01e403;
     }
-.grey-icon {
-    line-height: 1.5 !important;
-    color: #727272;
-}
+
+    .grey-icon {
+        line-height: 1.5 !important;
+        color: #727272;
+    }
 
     .sizing {
         font-size: 16px;
@@ -435,102 +476,121 @@ html {
         display: block;
         width: 33.3%;
         float: left;
-        transition:0.3s;
-        font-size:12px;
-        
+        transition: 0.3s;
+        font-size: 12px;
     }
-.chlimit {
-    max-width: 30ch !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
 
-}
-.floatleft {
-    float:left;
-    margin-right: 4px;
-}
-.floatright {
-    float: right;
-}
+    .chlimit {
+        max-width: 30ch !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-        .my-list:nth-child(odd) {
-            background-color: #d4d4d4;
-            color: #565656;
-        }
+    .floatleft {
+        float: left;
+        margin-right: 4px;
+    }
 
-        .my-list:nth-child(even) {
-            background-color: #eaeaea;
-            color: #727272;
-        }
-        .my-list:nth-child(odd):hover {
-            background-color: #e1e1e1;
-            color: #787878;
-        }
+    .floatright {
+        float: right;
+    }
+    .align-right {
+        text-align: right !important;
+    }
 
-        .my-list:nth-child(even):hover {
-            background-color: #f4f4f4;
-            color: #8e8e8e;
-        }
+    .my-list:nth-child(odd) {
+        background-color: #d4d4d4;
+        color: #565656;
+    }
 
-.subform {
-    background-color: rgb(236, 251, 255);
-    padding:20px;
-    margin:10%;
-    margin-bottom:0;
-}
-.subform-grn {
-    background-color: rgb(245, 255, 213);
-    padding: 20px;
-    margin: 10%;
-    margin-bottom: 0;
-}
-.subform-ylw {
-    background-color: rgb(241, 241, 241);
-    padding: 20px;
-    margin: 10%;
-    margin-bottom: 0;
-}
-.subform-red {
-    background-color: rgb(255, 208, 208);
-    padding: 20px;
-    margin: 10%;
-    margin-bottom: 0;
-}
+    .my-list:nth-child(even) {
+        background-color: #eaeaea;
+        color: #727272;
+    }
+
+    .my-list:nth-child(odd):hover {
+        background-color: #e1e1e1;
+        color: #787878;
+    }
+
+    .my-list:nth-child(even):hover {
+        background-color: #f4f4f4;
+        color: #8e8e8e;
+    }
+
+    .subform {
+        background-color: rgb(236, 251, 255);
+        padding: 20px;
+        margin: 10%;
+        margin-bottom: 0;
+    }
+
+    .subform-grn {
+        background-color: rgb(245, 255, 213);
+        padding: 20px;
+        margin: 10%;
+        margin-bottom: 0;
+    }
+
+    .subform-ylw {
+        background-color: rgb(241, 241, 241);
+        padding: 20px;
+        margin: 0% 10%;
+        margin-bottom: 0;
+    }
+
+    .subform-red {
+        background-color: rgb(255, 208, 208);
+        padding: 20px;
+        margin: 10%;
+        margin-bottom: 0;
+    }
+
     .sub-mit {
-    margin-right:10%;
-    float:right;
-}
-.sub-back {
-    margin-left: 10%;
-    float: left;
-}
-.subcol {
-    position: relative;
-    width:100% !important;
-    padding-right:15px;
-    padding-left:15px;
-}
+        margin-right: 10%;
+        float: right;
+    }
+
+    .sub-back {
+        margin-left: 10%;
+        float: left;
+    }
+
+    .subcol {
+        position: relative;
+        width: 100% !important;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
 
 
 
-.narrow {
-    padding:auto 30%;
-}
+    .narrow {
+        padding: auto 30%;
+    }
 
-.icon-transition {
-    padding-top:7px;
-    transition:0.3s;
-}
-.icon-transition:hover{
-    color:#aeaeae;
-}
-.large {
-    font-size: 18px;
-}
+    .icon-transition {
+        padding-top: 7px;
+        transition: 0.3s;
+    }
 
-.grey {
-    color: grey;
-}
-.small {
-    font-size:14px
-}
+        .icon-transition:hover {
+            color: #aeaeae;
+        }
+
+    .large {
+        font-size: 18px;
+    }
+
+    .grey {
+        color: grey;
+    }
+
+    .small {
+        font-size: 14px
+    }
+
+    .lowercase {
+        text-transform: lowercase;
+    }
+    

@@ -11,7 +11,7 @@
 <hr />
 <div class="subcol narrow">
     <form method="post">
-        <div class="subform-ylw">
+        <div class="subform-ylw widen-mobile">
             <div class="form-group">
                 Role
                 <select asp-for="Member.IsOwner">
@@ -20,11 +20,11 @@
                 </select>
             </div>
         </div>
-        <div class="sub-mit">
+        <div class="sub-mit widen-mobile">
             <input type="submit" value="Save" class="my-btn3 sizing" />
         </div>
     </form>
-    <div class="sizing sub-back">
+    <div class="sizing sub-back widen-mobile">
         <a class="my-btn3-back" asp-page="./Details" asp-route-id=@Model.Member.MemberID>Back to Information Page</a>
     </div>
 </div>

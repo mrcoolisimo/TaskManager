@@ -42,7 +42,7 @@ namespace TaskManager.Pages.Projects.Members
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                      User, project,
                                                      Operations.Update);
-            if (!isAuthorized.Succeeded || MyRole.IsOwner != 1)
+            if (!isAuthorized.Succeeded || MyRole.IsOwner != 1 || Member.Email == User.Identity.Name)
             {
                 return Forbid();
             }
@@ -82,7 +82,7 @@ namespace TaskManager.Pages.Projects.Members
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                      User, project,
                                                      Operations.Update);
-            if (!isAuthorized.Succeeded || MyRole.IsOwner != 1)
+            if (!isAuthorized.Succeeded || MyRole.IsOwner != 1 || member.Email == User.Identity.Name)
             {
                 return Forbid();
             }

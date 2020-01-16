@@ -9,7 +9,7 @@
 <hr />
 <div>
     <div class="subcol narrow">
-        <div class="subform-red">
+        <div class="subform-red widen-mobile">
             <a class="" asp-page="./Edit" asp-route-id=@Model.Tasking.TaskingID></a>
             <h4 class="center">@Html.DisplayFor(model => model.Tasking.TaskTitle)</h4>
             <p class="center grey small">Created By: @Html.DisplayFor(modelitem => Model.Tasking.TaskOwnerName)</p>
@@ -49,11 +49,11 @@
         
         <form method="post">
             <input type="hidden" asp-for="Tasking.TaskingID" />
-            <div class="sub-mit">
+            <div class="sub-mit widen-mobile">
                 <input class="my-btn3-dlt sizing" type="submit" value="Delete" />
             </div>
         </form>
-        <div class="sizing sub-back">
+        <div class="sizing sub-back widen-mobile">
             <a class="my-btn3-back" asp-page="./Details" asp-route-id="@Model.Tasking.TaskingID">Back to Information Page</a>
         </div>
     </div>

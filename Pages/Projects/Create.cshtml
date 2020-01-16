@@ -10,7 +10,7 @@
 <div class="subcol narrow">
 
     <form method="post">
-        <div class="subform-grn">
+        <div class="subform-grn widen-mobile">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Project.Title" class="control-label"></label>
@@ -18,11 +18,11 @@
                 <span asp-validation-for="Project.Title" class="text-danger"></span>
             </div>
         </div>
-        <div class="sub-mit">
+        <div class="sub-mit widen-mobile">
             <input type="submit" value="Create" class="my-btn3-grn sizing" />
         </div>
     </form>
-    <div class="sizing sub-back">
+    <div class="sizing sub-back widen-mobile">
         <a class="my-btn3-back" asp-page="/Projects/Index">Back to Project Page</a>
     </div>
 

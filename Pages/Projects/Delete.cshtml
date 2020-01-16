@@ -9,17 +9,17 @@
 <hr />
 
 <div class="subcol narrow">
-    <div class="subform-red">
+    <div class="subform-red widen-mobile">
         <h4 class="center">@Model.Project.Title</h4>
 
         <p>Owned By: @Html.DisplayFor(model => model.Project.Owner)</p>
     </div>
     <form method="post">
-        <div class="sub-mit">
+        <div class="sub-mit widen-mobile">
             <input class="my-btn3-dlt sizing" type="submit" value="Delete" />
         </div>
     </form>
-    <div class="sizing sub-back">
+    <div class="sizing sub-back widen-mobile">
         <a class="my-btn3-back" asp-page="/Projects/Details" asp-route-id=@Model.Project.ProjectID>Back to Information Page</a>
     </div>
 </div>

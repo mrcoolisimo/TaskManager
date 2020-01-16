@@ -9,15 +9,20 @@
 <hr />
 
 <div class="subcol narrow">
-    <div class="subform-ylw">
-        <h4 class="center">@Model.Project.Title</h4>
+    <div class="subform-ylw widen-mobile">
+        <h4 class="center4">@Model.Project.Title</h4>
+        <hr />
 
-        <p>Owned By: @Html.DisplayFor(model => model.Project.Owner)</p>
+        <p><string>Owned By: </string>@Html.DisplayFor(model => model.Project.Owner)</p>
     </div>
-    <div class="sub-mit">
-        <a class="my-btn3-dlt sizing" asp-page="/Projects/Delete" asp-route-id=@Model.Project.ProjectID>Delete</a>
-    </div>
-    <div class="sizing sub-back">
+    @if (Model.Project.Owner == User.Identity.Name)
+    {
+        <div class="sub-mit widen-mobile">
+            <a class="my-btn3-dlt sizing" asp-page="/Projects/Delete" asp-route-id=@Model.Project.ProjectID>Delete</a>
+        </div> 
+    }
+    
+    <div class="sizing sub-back widen-mobile">
         <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@Model.Project.ProjectID>Back to Project Page</a>
     </div>
 </div>

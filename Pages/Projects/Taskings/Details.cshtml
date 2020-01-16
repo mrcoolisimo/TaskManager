@@ -7,11 +7,15 @@
 
 <h2 class="center">Task Information</h2>
 <div>
+    <br /><br />
     <div class="subcol narrow">
-        <div class="subform-ylw">
-            <a class="" asp-page="./Edit" asp-route-id=@Model.Tasking.TaskingID><i class="fas fa-edit float-right icon-transition"></i></a>
-            <h4 class="center">@Html.DisplayFor(model => model.Tasking.TaskTitle)</h4>
-            <p class="center grey small">Created By @Html.DisplayFor(modelitem => Model.Tasking.TaskOwnerName)</p>
+        <div class="align-right">
+            <a class="" asp-page="./Edit" asp-route-id=@Model.Tasking.TaskingID><i class="fas fa-edit my-btn4 sizing widen-mobile"></i></a>
+        </div>
+        <div class="subform-ylw widen-mobile">
+
+            <h4 class="center4">@Html.DisplayFor(model => model.Tasking.TaskTitle)</h4>
+            <p class="center4 grey small">Created By @Html.DisplayFor(modelitem => Model.Tasking.TaskOwnerName)</p>
             <hr />
             <div class="center3 large">
                 "@Html.DisplayFor(model => model.Tasking.Description)"
@@ -43,12 +47,12 @@
                 <div><strong>Progression:</strong> Completed</div>
             }
             <br />
-        <div class="grey center small">Assigned To @Html.DisplayFor(model => model.Tasking.Assignment)</div>
+            <div class="grey center4 small">Assigned To @Html.DisplayFor(model => model.Tasking.Assignment)</div>
         </div>
-        <div class="sub-mit">
-            <a class="my-btn3-dlt sizing" asp-page="./Delete" asp-route-id=@Model.Tasking.TaskingID>Delete</a>
+        <div class="sub-mit widen-mobile">
+            <a class="my-btn3-dlt sizing " asp-page="./Delete" asp-route-id=@Model.Tasking.TaskingID>Delete</a>
         </div>
-        <div class="sizing sub-back">
+        <div class="sizing sub-back widen-mobile">
             <a class="my-btn3-back" asp-page="/Projects/TaskManagement" asp-route-id=@Model.Tasking.ProjectID>Back to Project Page</a>
         </div>
     </div>

@@ -169,3 +169,4 @@ C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Release\netcoreapp3.
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Release\netcoreapp3.1\TaskManager.csproj.CopyComplete
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Release\netcoreapp3.1\TaskManager.dll
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Release\netcoreapp3.1\TaskManager.pdb
+C:\Users\Liam York\source\repos\TaskManager\TaskManager\bin\Release\netcoreapp3.1\SendGrid.dll
