@@ -21,8 +21,8 @@ namespace TaskManager.Pages.Projects.Taskings
         }
         [BindProperty]
         public Project Project { get; set; }
-        [BindProperty]
-        public Tasking Tasking { get; set; }
+        //[BindProperty]
+        //public Tasking Tasking { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -51,8 +51,8 @@ namespace TaskManager.Pages.Projects.Taskings
             return Page();
         }
 
-        //[BindProperty]
-        //public Tasking Tasking { get; set; }
+        [BindProperty]
+        public Tasking Tasking { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
