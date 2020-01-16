@@ -14,32 +14,32 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Tasking.TaskTitle" class="control-label"></label>
-                <input asp-for="Tasking.TaskTitle" class="form-control" />
+                <input asp-for="Tasking.TaskTitle" class="form-control" autocomplete="off" />
                 <span asp-validation-for="Tasking.TaskTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Tasking.Description" class="control-label"></label>
-                <textarea asp-for="Tasking.Description" class="form-control"></textarea>
+                <textarea asp-for="Tasking.Description" class="form-control" autocomplete="off"></textarea>
                 <span asp-validation-for="Tasking.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <select asp-for="Tasking.Severity">
+                <select asp-for="Tasking.Severity" autocomplete="off">
                     <option value="0">Low</option>
                     <option value="1">Medium</option>
                     <option value="2">High</option>
                 </select>
             </div>
             <div class="form-group">
-                <select asp-for="Tasking.Progression">
+                <select asp-for="Tasking.Progression" autocomplete="off">
                     <option value="0">Created</option>
                     <option value="1">In Progress</option>
                     <option value="2">Completed</option>
                 </select>
             </div>
             <div class="form-group">
-                <label class="control-label">Assign To</label>
+                <label class="control-label" autocomplete="off">Assign To</label>
                 <select asp-for="Tasking.Assignment" asp-items="ViewBag.Members">
-                    <option value="No One">[none]</option>
+                    <option value="No One">None</option>
                 </select>
             </div>
         </div>

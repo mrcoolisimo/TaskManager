@@ -130,17 +130,21 @@
     @foreach (var item in Model.Project.Members)
     {
 
-        <a class="my-list link-pad" asp-page="./Members/Details" asp-route-id=@item.MemberID>
-            @if (item.Email == Model.Project.Owner)
+    <a class="my-list link-pad" asp-page="./Members/Details" asp-route-id=@item.MemberID>
+        @if (item.Email == Model.Project.Owner)
             {
-                <i class="fas fa-chess-king grey-icon floatleft"></i>
+        <i class="fas fa-chess-king grey-icon floatleft"></i>
             }
-            else
+        @if (item.IsOwner == 0)
             {
-                <i class="fas fa-chess-pawn grey-icon floatleft"></i>
+        <i class="fas fa-chess-pawn grey-icon floatleft"></i>
+            }
+        @if (item.IsOwner == 2)
+            {
+        <i class="fas fa-chess-knight grey-icon floatleft"></i>
             }
 
-            <div class="chlimit"> @Html.DisplayFor(modelitem => item.Email)</div>
-        </a>
+        <div class="chlimit"> @Html.DisplayFor(modelitem => item.Email)</div>
+    </a>
     }
 </div>

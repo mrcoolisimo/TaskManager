@@ -67,7 +67,8 @@ namespace TaskManager.Pages.Projects.Members
 
             Member.ProjectID = id;
             Member.ProjectName = project.Title;
-            Member.IsOwner = 0;
+            Member.IsOwner = 2;
+            Member.Email = Member.Email.ToLower();
             Context.Member.Add(Member);
             await Context.SaveChangesAsync();
 
