@@ -11,6 +11,6 @@
     <WebStackScaffolding_DbContextTypeFullName>TaskManager.Data.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <RazorPage_SelectedScaffolderID>Microsoft.WebTools.Scaffolding.Core.RazorPages.ModelBasedRazorPageScaffolder</RazorPage_SelectedScaffolderID>
     <RazorPage_SelectedScaffolderCategoryPath>root/RazorPage</RazorPage_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>MrCoolisimo - Web Deploy</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>mrcoolisimo - Web Deploy2</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

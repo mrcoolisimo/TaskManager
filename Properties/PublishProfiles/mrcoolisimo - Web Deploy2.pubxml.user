@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAhLV8wTX6HEONcNXEq4VMBgAAAAACAAAAAAAQZgAAAAEAACAAAACX0O7P0UXG2G0p96GF+4ueigOQnunGxY+/XfbMG3heAgAAAAAOgAAAAAIAACAAAAD0oIiGMujLQUvFcEu7uFKMVKe/8nYj21ansvR8JABvAYAAAAAGkCMnbvtS4Dc4p8t05644OHXiQaU3O9ZF0r0OtwqwpY2dHAWnGEwBjzlHmafPLykZufyYYtDaLwKEydLyF4eg+HK2hQfaeyq24LM/Z5Up0L7ewRxxxp9h+RNeUo4E/faUiXX3gewIuMw5ilaf2NAeN39F6CUThYNqgS7xglCs10AAAADE2zmtqE0UKGhe8JqPgtxpwkgm+taCZkEVmKp8MABNaf3h/3gDkI+I3XiOqVNdvjxwriNwI5aAvUXMDLLw0rq9</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:mrcserver5.database.windows.net,1433%3bInitial Catalog=mrcDB5%3bUser Id=the5secondninja%40gmail.com%40mrcserver5.database.windows.net%3bPassword=Redmarker7%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="TaskManager.Data.ApplicationDbContext">
+      <Value>Data Source=tcp:mrcserver5.database.windows.net,1433%3bInitial Catalog=mrcDB5%3bUser Id=the5secondninja%40gmail.com%40mrcserver5%3bPassword=Redmarker7</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>
