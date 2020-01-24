@@ -17,13 +17,18 @@ namespace TaskManager
         {
             _context = context;
         }
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-
+            Blog = await _context.Blog.FirstOrDefaultAsync(m => m.BlogID == 11);
         }
-        public IActionResult OnGetDemo1()
+        public async Task<IActionResult> OnGetDemo1Async()
         {
-            return new JsonResult("Hello");
+            var blog = await _context.Blog
+                            .AsNoTracking()
+                            .FirstOrDefaultAsync(m => m.BlogID == 11);
+            //var likers = blog.Likes;
+            return new JsonResult(blog.Likes);
+            //return new JsonResult("Hello");
         }
 
         [BindProperty]
@@ -57,7 +62,7 @@ namespace TaskManager
 
 
 
-        public async Task<ActionResult> OnPostWay2Async(string data)
+        public async Task<ActionResult> OnPostAsync(string data)
         {
             //return new JsonResult("Received " + data + " at " + DateTime.Now);
             var blog = await _context.Blog

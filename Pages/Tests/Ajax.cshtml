@@ -13,8 +13,8 @@
             $.ajax({
                 type: 'GET',
                 url: '@Url.Page("ajax", "demo1")',
-                success: function (result) {
-                    $('#result1').html(result);
+                success: function (eggs) {
+                    $('#result1').html(eggs);
                 }
             })
         });
@@ -35,6 +35,22 @@
             })
         });
     });
+
+$(document).ready(function() {
+    $("#btn").click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: "@Url.Action("way2")",
+            type: "POST",
+            data: "foo",
+            datatype: "text",
+            success: function (data) {
+                alert(data);
+            }
+        });
+        return false;
+    });
+});
 </script>
 
 @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
@@ -51,7 +67,7 @@
              e.preventDefault();
              var t = '@GetAntiXsrfRequestToken()';
              $.ajax({
-                      url: $(this).attr("formaction"),
+                      url: $(this).attr("way2"),
                       headers:
                       {
                           "RequestVerificationToken": t
@@ -64,7 +80,20 @@
                      alert(e);
              });
          });
-    })
+     })
+
+     $(document).ready(function () {
+
+        $('#btn').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Page("ajax", "demo1")',
+                success: function (eggs) {
+                    $('#result1').html(eggs);
+                }
+            })
+        });
+    });
 </script>
 
 <fieldset>
@@ -72,7 +101,7 @@
     <form>
         <input type="button" value="Demo 1" id="buttonDemo1" />
         <br />
-        <span id="result1"></span>
+        <span id="result14"></span>
     </form>
 </fieldset>
 
@@ -86,7 +115,7 @@
 </fieldset>
 
 <form method="POST">
-    <button type="submit" asp-route-data="foo" asp-page-handler="Way2">Way 2</button>
+    <button type="submit" >Way 2</button>
 </form>
 
-<button id="btn" type="button" class="btn btn-primary" value="way2">Way 2</button>
+<button id="btn" type="button" class="btn btn-primary" value="way2">Way 2 <span id="result1"></span></button>
