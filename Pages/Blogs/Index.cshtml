@@ -1,0 +1,39 @@
+﻿@page
+@model TaskManager.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="blog">
+    <h1>Blog Board</h1>
+
+    <p>
+        <a class="my-btn5" asp-page="Create">Create New</a> 
+    </p>
+
+    @foreach (var item in Model.Blog)
+    {
+        if (item.Tags.Contains("ECONOMICS"))
+        {
+            <a asp-page="./Details" asp-route-id="@item.BlogID" class="blog-container">
+                <h2>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h2>
+                <p class="grey smaller">
+                    By @Html.DisplayFor(modelItem => item.Author), @Html.DisplayFor(modelItem => item.Date)
+                </p>
+                <h6 class="grey">
+                    @if (item.Post.Length > 200)
+                    {
+                    @Html.Raw(item.Post.Substring(0, 200))          
+                    }
+                    @if (item.Post.Length <= 200)
+                    {
+                        @Html.Raw(item.Post);
+                    }
+                </h6>
+                   
+            </a>
+        }
+    }
+</div>

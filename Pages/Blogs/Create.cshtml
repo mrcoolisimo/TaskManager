@@ -1,0 +1,43 @@
+﻿@page
+@model TaskManager.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="blog-green">
+    <h1>Create</h1>
+
+    <h4>Blog</h4>
+    <hr />
+
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Blog.Title" class="control-label"></label>
+            <input asp-for="Blog.Title" class="form-control" />
+            <span asp-validation-for="Blog.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Blog.Post" class="control-label"></label>
+            <textarea asp-for="Blog.Post" class="wide-textbox"></textarea>
+            <span asp-validation-for="Blog.Post" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Blog.Tags" class="control-label"></label>
+            <input asp-for="Blog.Tags" class="form-control" />
+            <span asp-validation-for="Blog.Tags" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

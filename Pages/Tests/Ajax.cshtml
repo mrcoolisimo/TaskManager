@@ -1,0 +1,92 @@
+﻿@page
+@model TaskManager.AjaxModel
+@{
+    ViewData["Title"] = "Ajax";
+}
+
+
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('#buttonDemo1').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Page("ajax", "demo1")',
+                success: function (result) {
+                    $('#result1').html(result);
+                }
+            })
+        });
+    });
+
+    $(document).ready(function () {
+
+        $('#buttonDemo2').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Page("ajax", "demo2")',
+                headers: {
+                    RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function (result) {
+                    $('#result2').html(result);
+                }
+            })
+        });
+    });
+</script>
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Model.HttpContext).RequestToken;
+    }
+}
+<script>
+     $(function () {
+
+         $("#btn").click(function(e) {
+             e.preventDefault();
+             var t = '@GetAntiXsrfRequestToken()';
+             $.ajax({
+                      url: $(this).attr("formaction"),
+                      headers:
+                      {
+                          "RequestVerificationToken": t
+                      },
+                      type: "POST",
+                      data: { data: 'foo2' },
+             }).done(function(data) {
+                     console.log(data);
+             }).fail(function(a, v, e) {
+                     alert(e);
+             });
+         });
+    })
+</script>
+
+<fieldset>
+    <legemd>Demo 1</legemd>
+    <form>
+        <input type="button" value="Demo 1" id="buttonDemo1" />
+        <br />
+        <span id="result1"></span>
+    </form>
+</fieldset>
+
+<fieldset>
+    <legemd>Demo 2</legemd>
+    <form>
+        <input type="button" value="Demo 2" id="buttonDemo2" />
+        <br />
+        <span id="result2"></span>
+    </form>
+</fieldset>
+
+<form method="POST">
+    <button type="submit" asp-route-data="foo" asp-page-handler="Way2">Way 2</button>
+</form>
+
+<button id="btn" type="button" class="btn btn-primary" value="way2">Way 2</button>

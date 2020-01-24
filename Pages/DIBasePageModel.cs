@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TaskManager.Data;
 
-namespace TaskManager.Pages.Projects
+namespace TaskManager.Pages
 {
 	public class DIBasePageModel : PageModel
 	{

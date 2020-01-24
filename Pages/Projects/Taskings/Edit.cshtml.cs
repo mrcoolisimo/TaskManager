@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using TaskManager.Authorization;
 using TaskManager.Data;
 using TaskManager.Models;
@@ -125,6 +126,7 @@ namespace TaskManager.Pages.Projects.Taskings
             Tasking.ProjectID = tasking.ProjectID;
             Tasking.TaskOwner = tasking.TaskOwner;
             Tasking.TaskOwnerName = tasking.TaskOwnerName;
+            Tasking.Description = HttpUtility.HtmlEncode(Tasking.Description);
             Context.Attach(Tasking).State = EntityState.Modified;
 
             try

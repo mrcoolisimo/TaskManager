@@ -18,7 +18,12 @@
             <p class="center4 grey small">Created By @Html.DisplayFor(modelitem => Model.Tasking.TaskOwnerName)</p>
             <hr />
             <div class="center3 large">
-                "@Html.DisplayFor(model => model.Tasking.Description)"
+                @if (Model.Tasking.Description != null)
+                {
+                    <span>"</span>@Html.Raw(Model.Tasking.Description.Replace("\r\n", " < br /> "))<span>"</span>
+                } else  {
+                    <span>""</span>
+                }
             </div>
             <br />
             @if (Model.Tasking.Severity == 0)

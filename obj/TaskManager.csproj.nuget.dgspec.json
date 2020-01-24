@@ -38,6 +38,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNet.SignalR": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "Microsoft.AspNet.SignalR.Core": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.0, )"
@@ -70,9 +78,25 @@
               "target": "Package",
               "version": "[3.1.0, )"
             },
+            "Microsoft.jQuery.Unobtrusive.Ajax": {
+              "target": "Package",
+              "version": "[3.2.6, )"
+            },
+            "Ninject": {
+              "target": "Package",
+              "version": "[3.3.4, )"
+            },
+            "Ninject.Extensions.Conventions": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
             "SendGrid": {
               "target": "Package",
               "version": "[9.12.0, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.4.1, )"
             }
           },
           "imports": [

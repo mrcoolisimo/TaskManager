@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using TaskManager.Authorization;
 using TaskManager.Data;
 using TaskManager.Models;
@@ -80,6 +81,7 @@ namespace TaskManager.Pages.Projects.Taskings
             Tasking.ProjectID = id;
             Tasking.TaskOwner = UserManager.GetUserId(User);
             Tasking.TaskOwnerName = UserManager.GetUserName(User);
+            Tasking.Description = HttpUtility.HtmlEncode(Tasking.Description);
             Context.Tasking.Add(Tasking);
             await Context.SaveChangesAsync();
 
