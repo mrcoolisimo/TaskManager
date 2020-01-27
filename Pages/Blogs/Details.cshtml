@@ -20,14 +20,100 @@
     <a asp-page="./Index">Back to List</a>
 </div>
 
-<form method="post">
-    <div class="form-group">
-        <input type="submit" value="Likes @Model.Blog.Likes" class="btn btn-primary" />
-    </div>
-</form>
-<div id="result">
-    @Model.Blog.Likes
+@if (ViewBag.NoLikesYet == false)
+{
+    @if (Model.Likes.IsLiked == 0 || Model.Likes.IsLiked == null)
+    {
+        <button id="btn" type="button" class="unliked-btn" value="way2">Likes: <span id="result1">@Model.Blog.Likes</span></button>
+    }
+    @if (Model.Likes.IsLiked == 1)
+    {
+        <button id="btn" type="button" class="unliked-btn liked-btn" value="way2">Likes: <span id="result1">@Model.Blog.Likes</span></button>
+    }
+}
+else
+{
+    <button id="btn" type="button" class="unliked-btn" value="way2">Likes: <span id="result1">@Model.Blog.Likes</span></button>
+}
+<hr />
+
+<br />
+<br />
+
+<div class="comment-form">
+    <h2>Commentary</h2>
+    <br />
+    <h4>Make Your Own Comment:</h4>
+
+    <form method="post" class="">
+        <div class="">
+            <textarea asp-for="Comments.Post" class="comment-box" value="" autocomplete="off"></textarea>
+            <span asp-validation-for="Comments.Post" class="text-danger"></span>
+        </div>
+        <div class="">
+            <input type="submit" value="Submit" class="comment-submit" asp-page-handler="Comment" asp-route-id="@Model.Blog.BlogID" />
+        </div>
+    </form>
 </div>
 
+<br />
+<br />
 
+@foreach (var item in Model.CommentsList)
+{
+    <div class="comment" id="commentId">
+        <h5>
+            @Html.DisplayFor(modelItem => item.Author) On @Html.DisplayFor(modelItem => item.Date)
+        </h5>
+        <p>
+            @Html.DisplayFor(modelItem => item.Post)
+        </p>
+    </div>
+}
+
+<a asp-page="/Blogs/Details"
+   asp-route-id="@Model.Blog.BlogID"
+   asp-route-page="@Model.Blog.BlogID">
+    Next
+</a>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+
+<script>
+    $(".unliked-btn").click(function () {
+        $(this).toggleClass("liked-btn");
+    });
+</script>
+
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Model.HttpContext).RequestToken;
+    }
+}
+<script>
+    $(function () {
+
+        $("#btn").click(function (e) {
+            e.preventDefault();
+            var t = '@GetAntiXsrfRequestToken()';
+            $.ajax({
+                url: $(this).attr("way2"),
+                headers:
+                {
+                    "RequestVerificationToken": t
+                },
+                type: "POST",
+                data: { data: 'foo2' },
+            }).done(function (data) {
+                $('#result1').html(data);
+            }).fail(function (a, v, e) {
+                alert(e);
+            });
+        });
+    })
+</script>
 

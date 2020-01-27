@@ -603,6 +603,9 @@ html {
     .grey {
         color: grey;
     }
+    .white {
+        color: white !important;
+    }
 
     .small {
         font-size: 14px
@@ -661,6 +664,25 @@ html {
         border-radius: 12px;
         text-decoration: none;
     }
+.comment-form {
+    margin: auto 1em;
+}
+.comment {
+    background-color: #d4e9fb;
+    padding: 1em;
+    margin: 1em;
+}
+.comment-box {
+    width: 100%;
+    padding: 1em;
+}
+.comment-submit {
+    width: 100%;
+    padding:;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
 
 .my-btn5 {
     padding: 7px 12px;
@@ -682,4 +704,27 @@ html {
     width:100%;
     height: 400px;
     padding:0px 10px;
+}
+
+.liked-btn {
+    color: rgb(75, 195, 0)!important;
+    background-color: rgb(227, 253, 136) !important;
+
+}
+.unliked-btn {
+    padding: 7px 12px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(56, 145, 0);
+    background-color: rgb(174, 255, 72);
+    transition: 0.3s;
+}
+
+.et-pb-icon {
+    background-color: white;
+}
+.active {
+    background-color: black !important;
+    font-size: 100px !important;
 }

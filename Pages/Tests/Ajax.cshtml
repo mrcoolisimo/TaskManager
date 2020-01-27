@@ -115,7 +115,24 @@ $(document).ready(function() {
 </fieldset>
 
 <form method="POST">
-    <button type="submit" >Way 2</button>
+    <button type="submit">Way 2</button>
 </form>
 
 <button id="btn" type="button" class="btn btn-primary" value="way2">Way 2 <span id="result1"></span></button>
+
+<script>
+    $('button').on('click', function () {
+        $('button').removeClass('selected');
+        $(this).addClass('selected');
+    });</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<button class="et-pb-icon">Item</button>
+<button>Item</button>
+<button>Item</button>
+
+<script>
+    $(".et-pb-icon").click(function () {
+        $(this).toggleClass("active");
+    });
+</script>

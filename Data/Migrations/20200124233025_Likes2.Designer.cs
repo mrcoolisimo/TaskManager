@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TaskManager.Data;
 
 namespace TaskManager.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200124233025_Likes2")]
+    partial class Likes2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,30 +251,24 @@ namespace TaskManager.Data.Migrations
                     b.ToTable("Blog");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.Comment", b =>
+            modelBuilder.Entity("TaskManager.Models.BlogModels.UserLike", b =>
                 {
-                    b.Property<int>("CommentID")
+                    b.Property<int>("UserLikeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("BlogID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Post")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CommentID");
+                    b.HasKey("UserLikeID");
 
                     b.HasIndex("BlogID");
 
-                    b.ToTable("Comments");
+                    b.ToTable("UserLike");
                 });
 
             modelBuilder.Entity("TaskManager.Models.Member", b =>
@@ -365,29 +361,6 @@ namespace TaskManager.Data.Migrations
                     b.ToTable("Tasking");
                 });
 
-            modelBuilder.Entity("TaskManager.Models.UserLike", b =>
-                {
-                    b.Property<int>("UserLikeID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BlogID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IsLiked")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("UserLikeID");
-
-                    b.HasIndex("BlogID");
-
-                    b.ToTable("UserLike");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -439,10 +412,10 @@ namespace TaskManager.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TaskManager.Models.Comment", b =>
+            modelBuilder.Entity("TaskManager.Models.BlogModels.UserLike", b =>
                 {
                     b.HasOne("TaskManager.Models.Blog", "Blog")
-                        .WithMany("Comments")
+                        .WithMany("TrackLikes")
                         .HasForeignKey("BlogID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -466,15 +439,6 @@ namespace TaskManager.Data.Migrations
                     b.HasOne("TaskManager.Models.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("TaskManager.Models.UserLike", b =>
-                {
-                    b.HasOne("TaskManager.Models.Blog", "Blog")
-                        .WithMany("TrackLikes")
-                        .HasForeignKey("BlogID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

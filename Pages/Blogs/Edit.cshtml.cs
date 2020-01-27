@@ -29,10 +29,6 @@ namespace TaskManager
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             Blog = await Context.Blog.FirstOrDefaultAsync(m => m.BlogID == id);
 
