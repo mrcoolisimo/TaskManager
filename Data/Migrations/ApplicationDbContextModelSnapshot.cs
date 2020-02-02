@@ -236,13 +236,13 @@ namespace TaskManager.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Post")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(4000)");
 
                     b.Property<string>("Tags")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("BlogID");
 
@@ -266,7 +266,7 @@ namespace TaskManager.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Post")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("CommentID");
 
@@ -283,7 +283,7 @@ namespace TaskManager.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<int>("IsOwner")
                         .HasColumnType("int");
@@ -292,7 +292,7 @@ namespace TaskManager.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ProjectName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("MemberID");
 
@@ -315,7 +315,7 @@ namespace TaskManager.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("ProjectID");
 
@@ -333,7 +333,7 @@ namespace TaskManager.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(2000)");
 
                     b.Property<int?>("MemberID")
                         .HasColumnType("int");
@@ -354,7 +354,7 @@ namespace TaskManager.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaskTitle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(300)");
 
                     b.HasKey("TaskingID");
 

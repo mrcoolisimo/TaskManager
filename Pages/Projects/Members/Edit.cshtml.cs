@@ -58,7 +58,7 @@ namespace TaskManager.Pages.Projects.Members
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, [Bind("IsOwner")] Member Member)
         {
             if (!ModelState.IsValid)
             {

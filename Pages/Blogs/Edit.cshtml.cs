@@ -36,7 +36,13 @@ namespace TaskManager
             {
                 return NotFound();
             }
-            return Page();
+
+            if (UserManager.GetUserName(User) == Blog.Author)
+            {
+                return Page();
+            }
+
+            return Forbid();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -47,10 +53,11 @@ namespace TaskManager
             {
                 return Page();
             }
-
             var blog = await Context.Blog
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.BlogID == id);
+            if (UserManager.GetUserName(User) == blog.Author)
+            {
 
             Blog.Author = blog.Author;
             Blog.Tags = blog.Tags; 
@@ -75,8 +82,9 @@ namespace TaskManager
                     throw;
                 }
             }
+            }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { pageIndex = 1, id = Blog.BlogID });
         }
 
         private bool BlogExists(int id)

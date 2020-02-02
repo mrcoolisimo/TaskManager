@@ -1,0 +1,51 @@
+﻿@page
+@model TaskManager.SearchModel
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search</h1>
+
+<input type="search" id="searchrec" placeholder="Search Data" />
+
+<!--
+<table class="table" id="table1">
+    <tr>
+        <th>Title</th>
+    </tr>
+    @foreach (var item in Model.Results)
+    {
+        <tr>
+            <td>@item.Title</td>
+        </tr>
+    }
+</table>
+    -->
+
+@foreach (var item in Model.Results)
+{
+    <div id="t1">
+        <div id="t2">@item.Title</div>
+    </div>
+
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#searchrec').on('keyup', function () {
+            var datasearch = $(this).val().toLowerCase();
+            $('#t1 #t2').each(function () {
+                var stringdata = $(this).text().toLowerCase();
+                if (stringdata.indexOf(datasearch) === -1) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>

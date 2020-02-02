@@ -4,36 +4,88 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="blog">
-    <h1>Blog Board</h1>
-
-    <p>
-        <a class="my-btn5" asp-page="Create">Create New</a> 
-    </p>
-
-    @foreach (var item in Model.Blog)
-    {
-        if (item.Tags.Contains("ECONOMICS"))
-        {
-            <a asp-page="./Details" asp-route-id="@item.BlogID" class="blog-container">
-                <h2>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </h2>
-                <p class="grey smaller">
-                    By @Html.DisplayFor(modelItem => item.Author), @Html.DisplayFor(modelItem => item.Date)
-                </p>
-                <h6 class="grey">
-                    @if (item.Post.Length > 200)
-                    {
-                    @Html.Raw(item.Post.Substring(0, 200))<span>...</span>      
-                    }
-                    @if (item.Post.Length <= 200)
-                    {
-                        @Html.Raw(item.Post);
-                    }
-                </h6>
-                   
-            </a>
-        }
+<div class="blog" id="blogajax">
+    @{
+        var prevDisabled = !Model.BlogP.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.BlogP.HasNextPage ? "disabled" : "";
     }
+    <div>
+        <a asp-page=""
+           asp-route-pageIndex="@(Model.CurrentPage - 1)"
+           asp-route-SearchString="@Model.CurrentFilter"
+           class="my-btn5 floatleft @prevDisabled">
+            <i class="fas fa-caret-left"></i>
+        </a>
+        <a asp-page=""
+           asp-route-pageIndex="@(Model.CurrentPage + 1)"
+           asp-route-SearchString="@Model.CurrentFilter"
+           class="my-btn5 floatright @nextDisabled">
+            <i class="fas fa-caret-right"></i>
+        </a>
+
+        <h1 class="center">Blog Board</h1>
+        <br />
+        <p class="center">
+            <a class="my-btn5" asp-page="Create">Create New</a>
+        </p>
+        <br />
+        <form asp-page="./Index" method="get" class="center">
+            <br />
+            <input type="text" name="SearchString" class="comment-submit search-box" value="@Model.CurrentFilter" />
+            <input type="text" name="pageIndex" value="1" hidden />
+            <input type="submit" value="Search" class="comsub-blue" />
+        </form>
+
+        @Html.TextBox("Name")
+
+        <div id="resultsTable">
+            @foreach (var item in Model.BlogP)
+            {
+                <a asp-page="./Details" asp-route-id="@item.BlogID" asp-route-pageIndex="1" class="blog-container">
+                    <h2>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </h2>
+                    <p class="grey smaller">
+                        By @Html.DisplayFor(modelItem => item.Author), @Html.DisplayFor(modelItem => item.Date)
+                    </p>
+                    <h6 class="grey">
+                        @if (item.Post.Length > 200)
+                        {
+                            @Html.Raw(item.Post.Substring(0, 200))<span>...</span>
+                        }
+                        @if (item.Post.Length <= 200)
+                        {
+                            @Html.Raw(item.Post);
+                        }
+                    </h6>
+                </a>
+            }
+        </div>
+        <div>
+            <a asp-page=""
+               asp-route-pageIndex="@(Model.CurrentPage - 1)"
+               class="my-btn5 floatleft @prevDisabled">
+                <i class="fas fa-caret-left"></i>
+            </a>
+            <a asp-page=""
+               asp-route-pageIndex="@(Model.CurrentPage + 1)"
+               class="my-btn5 floatright @nextDisabled">
+                <i class="fas fa-caret-right"></i>
+            </a>
+        </div>
+    </div>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+<script>
+    $(function () {
+        $("#Name").keyup(function (e) {
+            var n = $("#Name").val();
+            $.get("/Blogs?SearchString=" + n + "pageIndex=1", function (r) {
+                //update ui with results
+                $("#resultsTable").html(r);
+            });
+        });
+</script>

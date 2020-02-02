@@ -1,0 +1,46 @@
+﻿@page
+@model TaskManager.AjaxPOSTModel
+
+@{
+    ViewData["Title"] = "AjaxPOST";
+}
+
+<h1>AjaxPOST</h1>
+
+
+<input type="text" id="input" />
+<button id="btn" type="button" class="btn btn-primary" value="way2">Way 2 <span id="result1" style="color:white;"></span></button>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Model.HttpContext).RequestToken;
+    }
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+
+<script>
+    $(function () {
+        $("#btn").click(function (e) {
+            e.preventDefault();
+            var t = '@GetAntiXsrfRequestToken()';
+            var datasearch = $('#input').val();
+            $.ajax({
+                url: '@Url.Page("ajaxpost", "")',
+                headers:
+                {
+                    "RequestVerificationToken": t
+                },
+                type: "POST",
+                data: { Title: datasearch },
+            })
+        });
+    })
+</script>

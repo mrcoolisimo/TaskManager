@@ -76,7 +76,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.0, )"
+              "version": "[3.1.1, )"
             },
             "Microsoft.jQuery.Unobtrusive.Ajax": {
               "target": "Package",
@@ -97,6 +97,10 @@
             "SendGrid": {
               "target": "Package",
               "version": "[9.12.0, )"
+            },
+            "WebMatrix.WebData": {
+              "target": "Package",
+              "version": "[2.0.30506, )"
             },
             "jQuery": {
               "target": "Package",

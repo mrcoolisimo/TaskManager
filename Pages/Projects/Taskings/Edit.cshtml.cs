@@ -79,7 +79,7 @@ namespace TaskManager.Pages.Projects.Taskings
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, [Bind("Description,TaskTitle,Severity,Progression,Assignment")] Tasking Tasking)
         {
             if (!ModelState.IsValid)
             {

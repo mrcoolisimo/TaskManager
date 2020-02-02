@@ -121,6 +121,9 @@ html {
         line-height: 60px; /* Vertically center the text there */
     }
 
+*:focus {
+    outline: 0 !important;
+}
     /*By Me
 ---------------------------------------------------- */
 
@@ -161,6 +164,12 @@ html {
         flex-basis: 100%;
         flex-grow: 2;
     }
+.my-row2 {
+    display: flex;
+    flex-basis: 100%;
+    flex-grow: 2;
+    justify-content:space-between;
+}
 
     .center {
         text-align: center;
@@ -514,6 +523,9 @@ html {
     .floatright {
         float: right;
     }
+.floatright2 {
+    align
+}
     .align-right {
         text-align: right !important;
     }
@@ -622,6 +634,9 @@ html {
 .large {
     font-size: 18px;
 }
+.larger {
+    font-size: 22px;
+}
 .Medium {
     font-size:16px;
 }
@@ -631,23 +646,33 @@ html {
 .blog{
     background-color:#c1ffd2;
     border-radius:25px;
-    padding:1em;
+    padding:1em 1em 4em 1em;
+}
+.blog-ylw {
+    background-color: #e9ffeb;
+    border-radius: 25px;
+    padding: 1em 1em 4em 1em;
 }
 .blog-grey {
     background-color: #d4e9fb;
     border-radius: 25px;
-    padding: 1em;
+    padding: 1em 1em 4em 1em;
+}
+.blog-red {
+    background-color: #fbdcd4;
+    border-radius: 25px;
+    padding: 1em 1em 4em 1em;
 }
 .blog-blue {
     background-color: #9ccdf2;
     border-radius: 25px;
-    padding: 1em;
+    padding: 1em 1em 4em 1em;
 }
 .blog-green {
     background-color: #c1ffd2;
     ;
     border-radius: 25px;
-    padding: 1em;
+    padding: 1em 1em 4em 1em;
 }
 .blog-container {
     background-color: #e8ffea;
@@ -671,10 +696,18 @@ html {
     background-color: #d4e9fb;
     padding: 1em;
     margin: 1em;
+    border-radius:25px;
 }
 .comment-box {
     width: 100%;
     padding: 1em;
+    border:none;
+    border-radius:25px;
+}
+.search-box {
+    padding: 0.5em;
+    border: none;
+    border-radius: 25px;
 }
 .comment-submit {
     width: 100%;
@@ -682,15 +715,51 @@ html {
     text-align: center;
     display: inline-block;
     text-decoration: none;
+    border:none;
 }
-
-.my-btn5 {
-    padding: 7px 12px;
+.comsub-blue {
+    width: 100%;
+    padding: 6px 12px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(18, 48, 191);
+    background-color: #64b9f8;
+    border-style: none;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+    .comsub-blue:hover {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        background-color: #43aeff;
+        border-radius: 12px;
+    }
+.comsub-grn {
+    width: 100%;
+    padding: 2px 12px;
     text-align: center;
     display: inline-block;
     text-decoration: none;
     color: rgb(40, 103, 1);
     background-color: #94e9ab;
+    border-style: none;
+}
+
+    .comsub-grn:hover {
+        text-decoration: none;
+        color: rgb(31, 104, 26);
+        background-color: #42ff74;
+    }
+
+    .my-btn5 {
+    padding: 9px 14px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(40, 103, 1);
+    background-color: #94e9ab;
+    border-radius:25px;
     transition: 0.3s;
 }
 
@@ -698,6 +767,87 @@ html {
         text-decoration: none;
         color: rgb(31, 104, 26);
         background-color: #42ff74;
+        border-radius:12px;
+    }
+    .my-btn5.disabled {
+        pointer-events:none;
+        background-color: lightgrey;
+        color: grey;
+    }
+.my-btn6 {
+    padding: 9px 14px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(18, 48, 191);
+    background-color: #64b9f8;
+    border-radius: 25px;
+    transition: 0.3s;
+    border:none;
+}
+    .my-btn6:hover {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        background-color: #43aeff;
+        border-radius: 12px;
+    }
+    .my-btn6.disabled {
+        pointer-events: none;
+        background-color: lightgrey;
+        color: grey;
+    }
+.my-btn7 {
+    padding: 9px 14px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(200, 199, 199);
+    background-color: #797979;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+    .my-btn7:hover {
+        text-decoration: none;
+        color: rgb(232, 232, 232);
+        background-color: #2a2a2a;
+        border-radius: 12px;
+    }
+.my-btn8 {
+    padding: 9px 14px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(239, 212, 212);
+    background-color: #fa5d9c;
+    border-radius: 25px;
+    border:none;
+    transition: 0.3s;
+}
+
+    .my-btn8:hover {
+        text-decoration: none;
+        color: rgb(255, 255, 255);
+        background-color: #ff1b1b;
+        border-radius: 12px;
+    }
+.my-btn9 {
+    padding: 9px 14px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(144, 127, 20);
+    background-color: #fff763;
+    border-radius: 25px;
+    border: none;
+    transition: 0.3s;
+}
+
+    .my-btn9:hover {
+        text-decoration: none;
+        color: rgb(187, 175, 91);
+        background-color: #fffcbf;
+        border-radius: 12px;
     }
 
 .wide-textbox{
@@ -709,6 +859,10 @@ html {
 .liked-btn {
     color: rgb(75, 195, 0)!important;
     background-color: rgb(227, 253, 136) !important;
+    border-style: none;
+    border: none;
+    outline:none;
+    
 
 }
 .unliked-btn {
@@ -719,7 +873,10 @@ html {
     color: rgb(56, 145, 0);
     background-color: rgb(174, 255, 72);
     transition: 0.3s;
+    border-style: none;
+    border-radius:25px;
 }
+
 
 .et-pb-icon {
     background-color: white;
@@ -727,4 +884,12 @@ html {
 .active {
     background-color: black !important;
     font-size: 100px !important;
+}
+.recycle {
+    margin-top:1em;
+}
+
+btm-margin {
+    margin-bottom:50%;
+    font-size:100px;
 }

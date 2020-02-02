@@ -55,6 +55,13 @@ namespace TaskManager
             await _context.SaveChangesAsync();
             return new JsonResult("Hello");
         }
+        public async Task<IActionResult> OnGetDemo3Async()
+        {
+            Blog = await _context.Blog.FirstOrDefaultAsync(m => m.BlogID == 12);
+            //return new JsonResult(Blog.Post);
+            var result = new { Title = Blog.Title, Post = Blog.Post };
+            return new JsonResult(result);
+        }
         private bool BlogExists(int id)
         {
             return _context.Blog.Any(e => e.BlogID == 11);

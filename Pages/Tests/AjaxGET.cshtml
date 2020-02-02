@@ -1,0 +1,57 @@
+﻿@page
+@model TaskManager.Ajax2Model
+
+@{
+    ViewData["Title"] = "Ajax2";
+}
+
+<h1>Ajax2</h1>
+
+<button id="btn" type="button" class="btn btn-primary" value="way2">Way 2 <span id="result1" style="color:white;"></span></button>
+<input type="text" id="input"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Model.HttpContext).RequestToken;
+    }
+}
+<script>
+     $(document).ready(function () {
+         $('#btn').click(function () {
+            var datasearch = $('#input').val();
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Page("ajaxget", "demo4")',
+                data: { foo: datasearch },
+                success: function (eggs) {
+                    $('#result1').html(eggs);
+                }
+            })
+         });
+
+    /* $(function () {
+         $("#btn").click(function(e) {
+             e.preventDefault();
+             var t = 'GetAntiXsrfRequestToken()';
+             var datasearch = $('#input').val();
+             $.ajax({
+                      url: 'Url.Page("ajaxtwo", "demo4")',
+                      headers:
+                      {
+                          "RequestVerificationToken": t
+                      },
+                 type: "POST",
+                 data: { foo: datasearch },
+             }).done(function(data) {
+                     console.log(data);
+             }).fail(function(a, v, e) {
+                     alert(e);
+             });
+         });
+     })*/
+    });
+</script>

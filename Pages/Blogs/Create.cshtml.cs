@@ -30,11 +30,15 @@ namespace TaskManager
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync([Bind("Title,Tags,Post")] Blog Blog)
         {
-            if (!ModelState.IsValid)
+            if (Blog.Title == null || Blog.Post == null)
             {
                 return Page();
+            }
+            if (Blog.Tags == null)
+            {
+                Blog.Tags = "";
             }
 
             Blog.Author = User.Identity.Name;
@@ -45,7 +49,7 @@ namespace TaskManager
             _context.Blog.Add(Blog);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details", new { pageIndex = 1, id = Blog.BlogID });
         }
     }
 }

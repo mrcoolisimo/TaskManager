@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TaskManager.Data;
 using TaskManager.Models;
-using TaskManager.Models.BlogModels;
 using TaskManager.Pages;
 using PagedList;
 
@@ -19,7 +18,7 @@ namespace TaskManager
     public class DetailsModel : DIBasePageModel
     {
         [BindProperty(SupportsGet = true)]
-        public int CurrentPage { get; set; } = 1;
+        public int? CurrentPage { get; set; }
         public int Count { get; set; }
         public int PageSize { get; set; } = 10;
         public int TotalPages => (int)Math.Ceiling(decimal.Divide(Count, PageSize));
@@ -37,21 +36,23 @@ namespace TaskManager
         public UserLike Likes { get; set; }
         [BindProperty]
         public Comment Comments { get; set; }
-        public IList<Comment> CommentsList { get; set; }
+        public Pagination<Comment> CommentsList { get; set; }
 
-
-        public async Task<IActionResult> OnGetAsync(int id, int page)
+        public async Task<ActionResult> OnGetAsync(int id, int? pageIndex)
         {
+            CurrentPage = pageIndex;
+            if (pageIndex <= 0)
+            {
+                CurrentPage = 1;
+            }
+
             Blog = await Context.Blog.FirstOrDefaultAsync(m => m.BlogID == id);
             //Blog = HttpUtility.HtmlEncode(Blog);
             Likes = await Context.UserLike
                 .AsNoTracking()
                 .Where(l => l.BlogID == id)
                 .FirstOrDefaultAsync(l => l.UserID == UserManager.GetUserId(User));
-            CommentsList = await Context.Comments
-                .Where(c => c.BlogID == id)
-                .OrderByDescending(b => b.Date)
-                .ToListAsync();
+            
             //Comments = await Context.Comments.FirstOrDefaultAsync(c => c.BlogID == id);
 
             if (Likes == null)
@@ -66,10 +67,35 @@ namespace TaskManager
             {
                 return NotFound();
             }
-            
+
+            IQueryable<Comment> commentsIQ = from c in Context.Comments select c;
+
+            int pageSize = 10;
+
+            Comments = await Context.Comments.FirstOrDefaultAsync(c => c.BlogID == id);
+
+            CommentsList = await Pagination<Comment>.CreateAsync(
+                commentsIQ.Where(c => c.BlogID == id).OrderByDescending(c => c.Date).AsNoTracking(), pageIndex ?? 1, pageSize);
 
             return Page();
         }
+
+        /*public async Task OnGetCommentsAsync(int page)
+        {
+            if (page < 1)
+            {
+                page = 1;
+            }
+            var pageSize = 2;
+            var skip = pageSize * (page - 1);
+
+            CommentsList2 = await Context.Comments
+                .Where(c => c.BlogID == 11)
+                .OrderByDescending(b => b.Date)
+                .Skip(skip)
+                .Take(pageSize)
+                .ToListAsync();
+        }*/
 
         public async Task<IActionResult> OnGetLikesAsync(int data)
         {
@@ -78,7 +104,7 @@ namespace TaskManager
                             .FirstOrDefaultAsync(m => m.BlogID == data);
             return new JsonResult(blog.Likes);
         }
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int id, [Bind("")] UserLike Likes)
         {
 
             var blog = await Context.Blog
@@ -156,7 +182,7 @@ namespace TaskManager
             }
             return new JsonResult(Blog.Likes);
         }
-        public async Task<IActionResult> OnPostCommentAsync(int id)
+        public async Task<IActionResult> OnPostCommentAsync(int id, int? pageIndex, [Bind("Post")] Comment Comments)
         {
             var blog = await Context.Blog
                 .AsNoTracking()
@@ -173,7 +199,22 @@ namespace TaskManager
             Context.Comments.Add(Comments);
             await Context.SaveChangesAsync();
 
-            return RedirectToPage("/Blogs/Details", new { id = pid});
+            return RedirectToPage("/Blogs/Details", new { id = pid, pageIndex = 1 });
+        }
+
+        public async Task<IActionResult> OnPostCommentDeleteAsync(int id, int? pageIndex, int CommentId)
+        {
+            var pid = id;
+
+            Comments = await Context.Comments.FirstOrDefaultAsync(c => c.CommentID == CommentId);
+
+            if (Comments.Author == User.Identity.Name)
+            {
+                Context.Comments.Remove(Comments);
+                await Context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("/Blogs/Details", new { id = pid, pageIndex = 1 });
         }
     }
 }

@@ -17,4 +17,5 @@ namespace TaskManager.Data
 		public DbSet<TaskManager.Models.UserLike> UserLike { get; set; }
 		public DbSet<TaskManager.Models.Comment> Comments { get; set; }
 	}
+
 }
