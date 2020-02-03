@@ -26,6 +26,8 @@ namespace TaskManager
 
         [BindProperty]
         public Blog Blog { get; set; }
+        [BindProperty]
+        public Comment Comment { get; set; }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
@@ -43,6 +45,24 @@ namespace TaskManager
             Blog.Post = "AJAX";
 
             _context.Blog.Add(Blog);
+            await _context.SaveChangesAsync();
+
+            return RedirectToPage("./Index");
+        }
+        public async Task<IActionResult> OnPostTwoAsync(string Title)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
+            
+            //Comment.Post = Title;
+            Comment.Date = DateTime.Now;
+            Comment.BlogID = 11;
+            Comment.Author = "AJAX";
+
+            _context.Comments.Add(Comment);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

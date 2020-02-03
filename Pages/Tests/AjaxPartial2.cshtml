@@ -1,0 +1,96 @@
+﻿@page
+@model TaskManager.AjaxPartial2Model
+@{
+    ViewData["Title"] = "AjaxPartial2";
+}
+
+<h1>AjaxPartial2</h1>
+
+<button id="btn1" type="button" class="btn btn-primary" value="prev">prev <span id="result1" style="color:white;"></span></button>
+<button id="btn2" type="button" class="btn btn-primary" value="next">next <span id="result1" style="color:white;"></span></button>
+<button id="btn3" type="button" class="btn btn-primary" value="next">submit <span id="result1" style="color:white;"></span></button>
+<div>num:<span id="num"></span></div><div>num:<span id="Max"></span></div>
+<div id="result2"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.js"></script>
+@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+@functions{
+    public string GetAntiXsrfRequestToken()
+    {
+        return Xsrf.GetAndStoreTokens(Model.HttpContext).RequestToken;
+    }
+}
+<script>
+
+
+    $(document).ready(function () {
+        var num = 1;
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Page("ajaxpartial", "")',
+            data: { pageIndex: (num) },
+            success: function (eggs) {
+                $('#result2').html(eggs);
+                $('#num').html(num);
+                $('#Max').html(@Model.Max);
+            }
+        });
+
+        $('#btn2').click(function () {
+            if (num < @Model.Max) { num += 1 };
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Page("ajaxpartial", "")',
+                data: { pageIndex: (num) },
+                success: function (eggs) {
+                    $('#result2').html(eggs);
+                    $('#num').html(num);
+                    $('#Max').html(@Model.Max);
+
+                }
+            })
+         });
+        $('#btn1').click(function () {
+            if (num > 1) { num -= 1 } else { num = num; }
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Page("ajaxpartial", "")',
+                data: { pageIndex: (num) },
+                success: function (eggs) {
+                    $('#result2').html(eggs);
+                    $('#num').html(num);
+                }
+            })
+        });
+        $("#btn3").click(function (e) {
+            e.preventDefault();
+            var t = '@GetAntiXsrfRequestToken()';
+            var datasearch = "TESTINGz";
+            $.ajax({
+                url: '@Url.Page("ajaxpost", "two")',
+                headers:
+                {
+                    "RequestVerificationToken": t
+                },
+                type: "POST",
+                data: { Title: datasearch },
+                success: function (eggs) {
+                    $('#result2').html(eggs);
+                }
+            })
+        });
+        $('#btn3').click(function () {
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Page("ajaxpartial", "")',
+                data: { pageIndex: (num) },
+                success: function (eggs) {
+                    $('#result2').html(eggs);
+                }
+            })
+         });
+    });
+</script>

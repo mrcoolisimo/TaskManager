@@ -1,0 +1,94 @@
+﻿@page
+@model TaskManager.AjaxPartialModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AjaxPartial</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="blog-blue">
+        @{
+            var prevDisabled = !Model.CommentsList.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.CommentsList.HasNextPage ? "disabled" : "";
+        }
+        <button id="btn1"
+           class="my-btn6 floatleft @prevDisabled">
+            <i class="fas fa-caret-left"></i>
+        </button>
+        <button id="btn2"
+           class="my-btn6 floatright @nextDisabled">
+            <i class="fas fa-caret-right"></i>
+        </button>
+        <div class="comment-form">
+
+            <h2 class="center">Commentary</h2>
+            <br />
+
+            <form method="post" class="">
+                <div class="">
+                    <textarea asp-for="Comments.Post" class="comment-box" maxlength="1000" value="" autocomplete="off"></textarea>
+                    <span asp-validation-for="Comments.Post" class="text-danger"></span>
+                </div>
+                <div class="">
+                    <input type="submit" value="Submit" class="comsub-blue" asp-page="ajaxpost" asp-page-handler="two" />
+                </div>
+            </form>
+
+        </div>
+
+        <br />
+        <br />
+        @foreach (var item in Model.CommentsList)
+        {
+
+            <div class="comment" id="commentId">
+                <div class="my-wrapper my-row2">
+                    <h5>
+                        Written By @Html.DisplayFor(modelItem => item.Author) On @Html.DisplayFor(modelItem => item.Date)
+                    </h5>
+                    @if (item.Author == User.Identity.Name)
+                    {
+                        <form asp-page="./Index" method="post" class="floatright">
+
+                            <input type="text" name="CommentId" value="@item.CommentID" hidden />
+                            <input type="text" name="id" value="@item.BlogID" hidden />
+                            <input type="submit" value="X" class="my-btn8" style="padding:0px 10px" asp-page-handler="CommentDelete" />
+                        </form>
+                    }
+                </div>
+                <p>
+                    @Html.DisplayFor(modelItem => item.Post)
+                </p>
+            </div>
+        }
+
+
+
+        <a asp-page=""
+           asp-route-id="11"
+           asp-route-pageIndex="@(Model.CurrentPage - 1)"
+           class="my-btn6 floatleft @prevDisabled">
+            <i class="fas fa-caret-left"></i>
+        </a>
+        <a asp-page=""
+           asp-route-id="11"
+           asp-route-pageIndex="@(Model.CurrentPage + 1)"
+           class="my-btn6 floatright @nextDisabled">
+            <i class="fas fa-caret-right"></i>
+        </a>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

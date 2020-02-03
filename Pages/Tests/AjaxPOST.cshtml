@@ -11,6 +11,16 @@
 <input type="text" id="input" />
 <button id="btn" type="button" class="btn btn-primary" value="way2">Way 2 <span id="result1" style="color:white;"></span></button>
 
+<form method="post" class="">
+    <div class="">
+        <textarea asp-for="Comment.Post" class="comment-box" maxlength="1000" value="" autocomplete="off"></textarea>
+        <span asp-validation-for="Comment.Post" class="text-danger"></span>
+    </div>
+    <div class="">
+        <input type="submit" value="Submit" class="comsub-blue" asp-page-handler="Two"/>
+    </div>
+</form>
+
 
 
 @section Scripts {
