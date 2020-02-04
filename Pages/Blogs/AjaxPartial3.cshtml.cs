@@ -10,11 +10,11 @@ using TaskManager.Models;
 
 namespace TaskManager
 {
-    public class AjaxPartialModel : PageModel
+    public class AjaxPartial3Model : PageModel
     {
         private readonly TaskManager.Data.ApplicationDbContext _context;
 
-        public AjaxPartialModel(TaskManager.Data.ApplicationDbContext context)
+        public AjaxPartial3Model(TaskManager.Data.ApplicationDbContext context)
         {
             _context = context;
         }
@@ -27,7 +27,7 @@ namespace TaskManager
         public async Task OnGetAsync(int? pageIndex,int id)
         {
             var count = (from o in _context.Comments
-                         where o.BlogID == id
+                         where o.CommentID == id
                          select o).Count();
             
 
@@ -41,6 +41,7 @@ namespace TaskManager
             {
                 pageIndex = 1;
             }
+            id = 51;
 
 
             IQueryable<Comment> commentsIQ = from c in _context.Comments select c;

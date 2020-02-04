@@ -49,23 +49,16 @@ namespace TaskManager
 
             return RedirectToPage("./Index");
         }
-        public async Task<IActionResult> OnPostTwoAsync(string Title)
+        public async Task OnPostTwoAsync(string Title)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             
-            //Comment.Post = Title;
+            Comment.Post = Title;
             Comment.Date = DateTime.Now;
             Comment.BlogID = 11;
             Comment.Author = "AJAX";
 
             _context.Comments.Add(Comment);
             await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
         }
     }
 }

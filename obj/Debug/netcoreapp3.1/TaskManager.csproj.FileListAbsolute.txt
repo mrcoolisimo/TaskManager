@@ -190,3 +190,4 @@ C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\Razor\Pages\Tests\AjaxPOST.cshtml.g.cs
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\Razor\Pages\Tests\AjaxPartial.cshtml.g.cs
 C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\Razor\Pages\Tests\AjaxPartial2.cshtml.g.cs
+C:\Users\Liam York\source\repos\TaskManager\TaskManager\obj\Debug\netcoreapp3.1\Razor\Pages\Blogs\AjaxPartial3.cshtml.g.cs

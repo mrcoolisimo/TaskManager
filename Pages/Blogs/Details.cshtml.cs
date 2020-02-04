@@ -17,6 +17,8 @@ namespace TaskManager
 {
     public class DetailsModel : DIBasePageModel
     {
+        public int Max { get; set; }
+
         [BindProperty(SupportsGet = true)]
         public int? CurrentPage { get; set; }
         public int Count { get; set; }
@@ -40,6 +42,12 @@ namespace TaskManager
 
         public async Task<ActionResult> OnGetAsync(int id, int? pageIndex)
         {
+            Count = Context.Comments.Count(t => t.BlogID == id);
+            Max = Count / 10;
+            if (Count % 10 != 0)
+            {
+                Max += 1;
+            }
             CurrentPage = pageIndex;
             if (pageIndex <= 0)
             {
@@ -182,7 +190,7 @@ namespace TaskManager
             }
             return new JsonResult(Blog.Likes);
         }
-        public async Task<IActionResult> OnPostCommentAsync(int id, int? pageIndex, [Bind("Post")] Comment Comments)
+        /*public async Task<IActionResult> OnPostCommentAsync(int id, int? pageIndex, [Bind("Post")] Comment Comments)
         {
             var blog = await Context.Blog
                 .AsNoTracking()
@@ -200,7 +208,7 @@ namespace TaskManager
             await Context.SaveChangesAsync();
 
             return RedirectToPage("/Blogs/Details", new { id = pid, pageIndex = 1 });
-        }
+        }*/
 
         public async Task<IActionResult> OnPostCommentDeleteAsync(int id, int? pageIndex, int CommentId)
         {
@@ -215,6 +223,17 @@ namespace TaskManager
             }
 
             return RedirectToPage("/Blogs/Details", new { id = pid, pageIndex = 1 });
+        }
+        public async Task OnPostTwoAsync(string Title, int id)
+        {
+
+            Comments.Post = Title;
+            Comments.Date = DateTime.Now;
+            Comments.BlogID = id;
+            Comments.Author = User.Identity.Name;
+
+            Context.Comments.Add(Comments);
+            await Context.SaveChangesAsync();
         }
     }
 }
