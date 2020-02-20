@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,11 @@ namespace TaskManager
 
 			services.AddRazorPages();
 
+			services.AddSpaStaticFiles(configuration =>
+			{
+				configuration.RootPath = "ClientApp/build";
+			});
+
 			services.AddControllers(config =>
 			{
 				// using Microsoft.AspNetCore.Mvc.Authorization;
@@ -75,6 +81,7 @@ namespace TaskManager
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
+			app.UseSpaStaticFiles();
 
 			app.UseRouting();
 
@@ -84,6 +91,19 @@ namespace TaskManager
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapRazorPages();
+				endpoints.MapControllerRoute(
+					name: "default",
+					pattern: "{controller}/{action=Index}/{id?}");
+			});
+
+			app.UseSpa(spa =>
+			{
+				spa.Options.SourcePath = "ClientApp";
+
+				if (env.IsDevelopment())
+				{
+					spa.UseReactDevelopmentServer(npmScript: "start");
+				}
 			});
 		}
 	}

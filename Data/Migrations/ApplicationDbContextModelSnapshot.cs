@@ -275,6 +275,42 @@ namespace TaskManager.Data.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("TaskManager.Models.Food", b =>
+                {
+                    b.Property<int>("FoodID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Carbs")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Fats")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Owner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Protein")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RealDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Servings")
+                        .HasColumnType("int");
+
+                    b.HasKey("FoodID");
+
+                    b.ToTable("Food");
+                });
+
             modelBuilder.Entity("TaskManager.Models.Member", b =>
                 {
                     b.Property<int>("MemberID")
@@ -386,6 +422,36 @@ namespace TaskManager.Data.Migrations
                     b.HasIndex("BlogID");
 
                     b.ToTable("UserLike");
+                });
+
+            modelBuilder.Entity("TaskManger.Models.DayTotal", b =>
+                {
+                    b.Property<int>("DayTotalID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Owner")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("RealDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TotalCarbs")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalFats")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalProtein")
+                        .HasColumnType("int");
+
+                    b.HasKey("DayTotalID");
+
+                    b.ToTable("DayTotal");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

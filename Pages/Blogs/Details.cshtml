@@ -64,12 +64,14 @@
         <i class="fas fa-caret-right"></i>
     </button>
     <h2 class="center">Commentary</h2>
+    <div class="center">Page <span id="page1"></span> of <span id="page2"></span></div>
     <br />
     <textarea asp-for="Comments.Post" class="comment-box" id="input" maxlength="1000" value="" autocomplete="off"></textarea>
     <button id="btn4"
             class="my-btn6 floatright">
         Submit Comment
     </button>
+    <div id="result3"></div>
 
     <div id="result2"></div>
 </div>
@@ -130,9 +132,16 @@
             maxcount += 1;
         }
 
+        if (maxcount == 0) {
+            maxcount = 1;
+        }
+
         if (count > 10) {
             element2.classList.remove("disabled");
         }
+
+        $('#page1').html(num);
+        $('#page2').html(maxcount);
 
         $.wait = function(ms) {
             var defer = $.Deferred();
@@ -146,8 +155,7 @@
             data: { pageIndex: (num), id: @Model.Blog.BlogID },
             success: function (eggs) {
                 $('#result2').html(eggs);
-                $('#num').html(num);
-                $('#Max').html(maxcount);
+
             }
         });
 
@@ -159,8 +167,7 @@
                 data: { pageIndex: (num), id: @Model.Blog.BlogID },
                 success: function (eggs) {
                     $('#result2').html(eggs);
-                    $('#num').html(num);
-                    $('#Max').html(@Model.Max);
+
                     if (num == maxcount) {
                         element2.classList.add("disabled");
                     } else {
@@ -171,6 +178,8 @@
                     } else {
                         element1.classList.remove("disabled");
                     }
+                    $('#page1').html(num);
+                    $('#page2').html(maxcount);
                 }
             })
          });
@@ -193,6 +202,8 @@
                     } else {
                         element1.classList.remove("disabled");
                     }
+                    $('#page1').html(num);
+                    $('#page2').html(maxcount);
                 }
             })
         });
@@ -209,6 +220,8 @@
                 type: "POST",
                 data: { Title: datasearch, id: @Model.Blog.BlogID  },
                 success: function (eggs) {
+                    $('#page1').html(num);
+                    $('#page2').html(maxcount);
                 }
             })
         });
@@ -226,7 +239,9 @@
                     success: function (eggs) {
                         //window.setTimeout(10000);
                         $('#result2').html(eggs);
-                        
+                        $('#page1').html(num);
+                        $('#page2').html(maxcount);
+
                     }
                 })
             }, 500)
