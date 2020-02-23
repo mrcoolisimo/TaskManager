@@ -1,7 +1,7 @@
 import axios from "axios";
 
-//const baseUrl = "https://localhost:44323/api/"
-const baseUrl = "https://mrcoolisimo.azurewebsites.net/api/"
+const baseUrl = "https://localhost:44323/api/"
+//const baseUrl = "https://mrcoolisimo.azurewebsites.net/api/"
 
 
 export default {

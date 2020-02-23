@@ -36,7 +36,13 @@ namespace TaskManager.Controllers
         {
             // var dateTime = DateTime.UtcNow.Date;
             // return await _context.Food.Where(f => f.Date == dateTime.ToString("dd/MM/yyyy")).ToListAsync();
-            var dateTime = DateTime.UtcNow.Date.AddDays(num).AddHours(-8);
+            var time = DateTime.UtcNow.Hour;
+            if (time >= 0 && time < 8)
+            {
+                num -= 1;
+                Trace.WriteLine("NICE");
+            }
+            var dateTime = DateTime.UtcNow.Date.AddDays(num-1);
             return await _context.Food.Where(f => f.Date == dateTime.ToString("dd/MM/yyyy") && 
                         f.Owner == User.Identity.Name).ToListAsync();
         }
@@ -137,6 +143,12 @@ namespace TaskManager.Controllers
             Trace.WriteLine("222222222222222222222222222!", food.ToString());
             //var user = (UserManager.GetUserId(User) != null) ? UserManager.GetUserId(User) : "Woops";
             //Trace.WriteLine(UserManager.GetUserId(User));
+            var time = DateTime.UtcNow.Hour;
+            if (time >= 0 && time < 8)
+            {
+                num -= 1;
+                Trace.WriteLine("NICE");
+            }
             var dateTime = DateTime.UtcNow.Date.AddDays(num + 1).AddHours(-8);
             food.Date = DateTime.UtcNow.Date.AddDays(num + 1).AddHours(-8).ToString("dd/MM/yyyy");
             food.RealDate = dateTime;

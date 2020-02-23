@@ -31,6 +31,12 @@ namespace TaskManager.Controllers
         {
             var dateTime = DateTime.UtcNow.Date;
             date += 1;
+            var time = DateTime.UtcNow.Hour;
+            if (time >= 0 && time < 8)
+            {
+                date -= 1;
+                //Trace.WriteLine("NICE");
+            }
 
             for (int index = 0; index <= 6; index++)
             {

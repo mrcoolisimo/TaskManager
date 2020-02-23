@@ -32,7 +32,7 @@ function buttonWait() {
     boo = false
   }
 
-var usaTime = new Date().toLocaleString("en-US", {timeZone: "America/New_York"});
+var usaTime = new Date().toLocaleString("en-US", { timeZone: "Pacific/Pitcairn"});
 const date = new Date(usaTime);
 const year = date.getFullYear();
 const month = date.getMonth();
