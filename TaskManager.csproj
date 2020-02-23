@@ -5,16 +5,27 @@
     <UserSecretsId>aspnet-TaskManager-DBFA5A47-3724-453A-AB00-C6346A32CE13</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="wwwroot\ClientApp\build\**" />
+    <Content Remove="wwwroot\ClientApp\build\**" />
+    <EmbeddedResource Remove="wwwroot\ClientApp\build\**" />
+    <None Remove="wwwroot\ClientApp\build\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\ClientApp\public\web.txt" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="jQuery" Version="3.4.1" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
     <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.1" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Core" Version="2.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.0" />
@@ -32,6 +43,38 @@
 
   <ItemGroup>
     <Folder Include="Models\CalorieModels\" />
+    <Folder Include="wwwroot\ClientApp\build2\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="wwwroot\ClientApp\.gitignore" />
+    <None Include="wwwroot\ClientApp\public\favicon.ico" />
+    <None Include="wwwroot\ClientApp\public\index.html" />
+    <None Include="wwwroot\ClientApp\README.md" />
+    <None Include="wwwroot\ClientApp\src\actions\api.js" />
+    <None Include="wwwroot\ClientApp\src\actions\DayTotal.js" />
+    <None Include="wwwroot\ClientApp\src\actions\Food.js" />
+    <None Include="wwwroot\ClientApp\src\actions\store.js" />
+    <None Include="wwwroot\ClientApp\src\App.js" />
+    <None Include="wwwroot\ClientApp\src\App.test.js" />
+    <None Include="wwwroot\ClientApp\src\components\Counter.js" />
+    <None Include="wwwroot\ClientApp\src\components\FetchData.js" />
+    <None Include="wwwroot\ClientApp\src\components\FoodChart.js" />
+    <None Include="wwwroot\ClientApp\src\components\FoodForm.js" />
+    <None Include="wwwroot\ClientApp\src\components\Foods.js" />
+    <None Include="wwwroot\ClientApp\src\components\Home.js" />
+    <None Include="wwwroot\ClientApp\src\components\Layout.js" />
+    <None Include="wwwroot\ClientApp\src\components\NavMenu.css" />
+    <None Include="wwwroot\ClientApp\src\components\NavMenu.js" />
+    <None Include="wwwroot\ClientApp\src\components\useForm.js" />
+    <None Include="wwwroot\ClientApp\src\custom.css" />
+    <None Include="wwwroot\ClientApp\src\index.js" />
+    <None Include="wwwroot\ClientApp\src\reducers\DayTotal.js" />
+    <None Include="wwwroot\ClientApp\src\reducers\Food.js" />
+    <None Include="wwwroot\ClientApp\src\reducers\index.js" />
+    <None Include="wwwroot\ClientApp\src\registerServiceWorker.js" />
+    <None Include="wwwroot\ClientApp\src\utils\getCurrentDate.js" />
   </ItemGroup>
 
 </Project>

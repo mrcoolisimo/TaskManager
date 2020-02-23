@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[2.4.1, )"
             },
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.0, )"
@@ -61,10 +65,6 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[3.1.0, )"
-            },
-            "Microsoft.AspNetCore.SpaServices": {
-              "target": "Package",
-              "version": "[3.1.2, )"
             },
             "Microsoft.AspNetCore.SpaServices.Extensions": {
               "target": "Package",

@@ -801,3 +801,94 @@ END;
 
 GO
 
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200219223304_calorie')
+BEGIN
+    CREATE TABLE [DayTotal] (
+        [DayTotalID] int NOT NULL IDENTITY,
+        [TotalFats] int NOT NULL,
+        [TotalCarbs] int NOT NULL,
+        [TotalProtein] int NOT NULL,
+        [Date] nvarchar(max) NULL,
+        [RealDate] datetime2 NOT NULL,
+        CONSTRAINT [PK_DayTotal] PRIMARY KEY ([DayTotalID])
+    );
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200219223304_calorie')
+BEGIN
+    CREATE TABLE [Food] (
+        [FoodID] int NOT NULL IDENTITY,
+        [Name] nvarchar(max) NULL,
+        [Servings] int NOT NULL,
+        [Fats] int NOT NULL,
+        [Carbs] int NOT NULL,
+        [Protein] int NOT NULL,
+        [Date] nvarchar(max) NULL,
+        [RealDate] datetime2 NOT NULL,
+        CONSTRAINT [PK_Food] PRIMARY KEY ([FoodID])
+    );
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200219223304_calorie')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20200219223304_calorie', N'3.1.0');
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200220012756_calorieAuth')
+BEGIN
+    ALTER TABLE [Food] ADD [Owner] int NOT NULL DEFAULT 0;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200220012756_calorieAuth')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20200220012756_calorieAuth', N'3.1.0');
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200220014018_calorieAuth2')
+BEGIN
+    DECLARE @var11 sysname;
+    SELECT @var11 = [d].[name]
+    FROM [sys].[default_constraints] [d]
+    INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+    WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Food]') AND [c].[name] = N'Owner');
+    IF @var11 IS NOT NULL EXEC(N'ALTER TABLE [Food] DROP CONSTRAINT [' + @var11 + '];');
+    ALTER TABLE [Food] ALTER COLUMN [Owner] nvarchar(max) NULL;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200220014018_calorieAuth2')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20200220014018_calorieAuth2', N'3.1.0');
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200220024735_daytotalOwner')
+BEGIN
+    ALTER TABLE [DayTotal] ADD [Owner] nvarchar(max) NULL;
+END;
+
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20200220024735_daytotalOwner')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20200220024735_daytotalOwner', N'3.1.0');
+END;
+
+GO
+

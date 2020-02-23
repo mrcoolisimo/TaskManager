@@ -13,9 +13,4 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <Value>Data Source=tcp:mrcserver5.database.windows.net,1433%3bInitial Catalog=mrcDB5%3bUser Id=the5secondninja%40gmail.com%40mrcserver5.database.windows.net%3bPassword=Redmarker7%3b</Value>
     </DestinationConnectionStrings>
   </ItemGroup>
-  <ItemGroup>
-    <EFMigrations Include="TaskManager.Data.ApplicationDbContext">
-      <Value>Data Source=tcp:mrcserver5.database.windows.net,1433%3bInitial Catalog=mrcDB5%3bUser Id=the5secondninja%40gmail.com%40mrcserver5%3bPassword=Redmarker7</Value>
-    </EFMigrations>
-  </ItemGroup>
 </Project>

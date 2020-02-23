@@ -3,7 +3,4 @@
   <parameter name="IIS Web Application Name" description="" value="mrcoolisimo" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Liam\ York\\source\\repos\\TaskManager\\TaskManager\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
   </parameter>
-  <parameter name="TaskManager.Data.ApplicationDbContext" description="" value="Data Source=tcp:mrcserver5.database.windows.net,1433;Initial Catalog=mrcDB5;User Id=the5secondninja@gmail.com@mrcserver5;Password=Redmarker7" tags="dbfullsql">
-    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\Liam\ York\\source\\repos\\TaskManager\\TaskManager\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\TaskManager\.Data\.ApplicationDbContext\.sql$" />
-  </parameter>
 </parameters>
