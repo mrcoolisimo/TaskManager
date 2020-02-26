@@ -155,7 +155,7 @@ namespace TaskManager.Controllers
             food.Owner = User.Identity.Name;
 
             //DayTotal = await _context.DayTotal.FirstOrDefaultAsync(d => d.DayTotalID == 1);
-            var dayTotal = await _context.DayTotal.FirstOrDefaultAsync(d => d.Date == food.Date);
+            var dayTotal = await _context.DayTotal.FirstOrDefaultAsync(d => d.Date == food.Date && d.Owner == food.Owner);
             if (dayTotal == null)
             {
                 DayTotal.TotalCarbs = food.Carbs * food.Servings;
@@ -193,7 +193,7 @@ namespace TaskManager.Controllers
                 return NotFound();
             }
 
-            var dayTotal = await _context.DayTotal.FirstOrDefaultAsync(d => d.Date == food.Date);
+            var dayTotal = await _context.DayTotal.FirstOrDefaultAsync(d => d.Date == food.Date && d.Owner == food.Owner);
             dayTotal.TotalCarbs -= food.Carbs * food.Servings;
             dayTotal.TotalFats -= food.Fats * food.Servings;
             dayTotal.TotalProtein -= food.Protein * food.Servings;

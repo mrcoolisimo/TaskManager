@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <Folder Include="Models\CalorieModels\" />
+    <Folder Include="wwwroot\Downloads\" />
     <Folder Include="wwwroot\ClientApp\build2\" />
   </ItemGroup>
 
@@ -75,6 +76,7 @@
     <None Include="wwwroot\ClientApp\src\reducers\index.js" />
     <None Include="wwwroot\ClientApp\src\registerServiceWorker.js" />
     <None Include="wwwroot\ClientApp\src\utils\getCurrentDate.js" />
+    <None Include="wwwroot\Downloads\ResumeTest.txt" />
   </ItemGroup>
 
 </Project>

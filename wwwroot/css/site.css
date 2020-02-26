@@ -445,6 +445,24 @@ html {
         color: rgb(97, 205, 232);
         background-color: rgb(194, 242, 254);
     }
+
+.my-btn10 {
+    padding: 4px 12px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(11, 89, 108);
+    background-color: rgb(181, 212, 234);
+    transition: 0.3s;
+    border: none;
+}
+
+    .my-btn10:hover {
+        text-decoration: none;
+        color: rgb(62, 197, 230);
+        background-color: rgb(194, 242, 254);
+    }
+
     .alt-row-color:nth-child(odd) .my-btn {
         color: #6087b0;
     }
@@ -889,7 +907,61 @@ html {
     margin-top:1em;
 }
 
-btm-margin {
+.btm-margin {
     margin-bottom:50%;
     font-size:100px;
+}
+
+.btn-home {
+    padding: 15px 10px;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    transition: 0.3s;
+    font-size: 2rem;
+    margin:0;
+    width:100%;
+}
+.clr-home-blue {
+    color: rgb(36, 36, 36);
+    background-color: #d4e9fb;
+}
+.clr-home-green {
+    color: rgb(36, 36, 36);
+    background-color: #ddfbd4;
+}
+.clr-home-yellow {
+    color: rgb(36, 36, 36);
+    background-color: #fbf7d4;
+}
+.flex {
+    display: flex;
+    flex-basis: 100%;
+}
+.flex-item {
+    flex-direction: row;
+    flex-basis:100%;
+}
+.third {
+    width:100%;
+}
+.pic-opacity {
+    opacity:0.8
+}
+.pic-size {
+    width:100%;
+    height:100%;
+}
+.grey-bg {
+    background-color: rgb(231, 254, 252);
+}
+.red-bg {
+    background-color: rgb(254, 231, 237);
+}
+.pcenter {
+    width:80%;
+    margin: auto;
+    margin-top: 10px;
+    text-indent: 2rem;
 }

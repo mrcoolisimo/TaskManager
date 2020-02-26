@@ -4,11 +4,175 @@
     ViewData["Title"] = "Home page";
 }
 
+<style>
+    #more {
+        display: none;
+    }
+
+    #more2 {
+        display: none;
+    }
+
+    #more3 {
+        display: none;
+    }
+</style>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Liam York</h1>
+    <p class="large">I am a <strong>Full-Stack Developer</strong> looking for work in Seattle, Washington.</p>
 </div>
 
-<div class="test">
-    Hey World
+<br />
+<br />
+
+<div class="flex">
+    <a href="~/Downloads/ResumeTest.txt" class="third flex-item" download>
+        <button class="btn-home clr-home-green flex-item">Resume</button>
+    </a>
+    <a href="https://github.com/mrcoolisimo" target="_blank" class="third flex-item">
+        <button class="btn-home clr-home-yellow">Github</button>
+    </a>
+    <a href="https://www.linkedin.com/in/liamyork/" target="_blank" class="third flex-item">
+        <button class="btn-home clr-home-blue">LinkedIn</button>
+    </a>
 </div>
+
+<br />
+<br />
+<br />
+
+<h1 class="center">Projects</h1>
+<br />
+<div class="grey-bg">
+    <br />
+
+    <h2 class="center">Task Manager<span id="dots">...</span></h2>
+
+    <span id="more">
+        <p class="pcenter">    An app designed to organize tasks delegated to members of collaborative project. Works with the SQL database to track progress, severity and details of tasks that can be assigned to specific members. There is also working authorization to ensure security and privacy, with a simple invitation system to grant users access to your projects.</p>
+
+        <br />
+
+        <div class="center">
+            <img class="pic-size" src="~/Downloads/mrcpic1.png" />
+        </div>
+        <p class="pcenter"><i><strong>Skills used: Authentication, Authorization, Razor, RazorPages, CRUD Operations</strong></i></p>
+    </span>
+    <br />
+    <div class="center">
+        <button onclick="myFunction()" id="myBtn" class="my-btn10">Read more</button>
+    </div>
+    <br /><br /><br />
+
+
+
+    <h2 class="center">Paginated Forum<span id="dots2">...</span></h2>
+    <span id="more2">
+        <p class="pcenter">A forum with a clean interface that automatically paginates itself so as not to overwhelm the browser, has sort functionality, an Ajax comments section and like button, HTML filtering to prevent injection attacks, and authroization checks.</p>
+
+        <br />
+
+        <div class="center">
+            <img class="pic-size" src="~/Downloads/mrcpic2.png" />
+            <img class="pic-size" src="~/Downloads/mrcpic3.png" />
+        </div>
+        <p class="pcenter"><i><strong>Skills used: Ajax for Like Button and Comments, HTML input filtering, partial pages, Pagination (static and realtime)</strong></i></p>
+    </span>
+
+    <br />
+
+    <div class="center">
+        <button onclick="myFunction2()" id="myBtn2" class="my-btn10">Read more</button>
+    </div>
+
+    <br /><br /><br />
+
+
+
+    <h2 class="center">MyMacroPal<span id="dots3">...</span></h2>
+    <span id="more3">
+        <p class="pcenter">A React App that allows the user to track foods throughout their day and will track their total macronutrient consumtion. The data is then displayed on a colorful graph.</p>
+
+        <br />
+
+        <div class="center">
+            <img class="pic-size" src="~/Downloads/mrcpic4.png" />
+        </div>
+        <p class="pcenter"><i><strong>Skills used: React, Redux, WebAPI, Chartjs</strong></i></p>
+    </span>
+
+    <br />
+
+    <div class="center">
+        <button onclick="myFunction3()" id="myBtn3" class="my-btn10">Read more</button>
+    </div>
+
+    <br /><br />
+</div>
+
+<br />
+<br />
+<br />
+
+<h1 class="center">Offsite Projects</h1>
+<br />
+<div class="red-bg">
+    <br />
+    <h2 class="center">Original "MrCoolisimo" Website<span id="dots4">...</span></h2>
+    <br /><br /><br />
+    <h2 class="center">Twitter WeatherBot<span id="dots4">...</span></h2>
+    <br /><br /><br />
+    <h2 class="center">Marriage Rates Spreadsheet Interpreter<span id="dots4">...</span></h2>
+    <br /><br /><br />
+</div>
+
+
+
+<script>
+    function myFunction() {
+        var dots = document.getElementById("dots");
+        var moreText = document.getElementById("more");
+        var btnText = document.getElementById("myBtn");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+        }
+    }
+    function myFunction2() {
+        var dots = document.getElementById("dots2");
+        var moreText = document.getElementById("more2");
+        var btnText = document.getElementById("myBtn2");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+        }
+    }
+    function myFunction3() {
+        var dots = document.getElementById("dots3");
+        var moreText = document.getElementById("more3");
+        var btnText = document.getElementById("myBtn3");
+
+        if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            moreText.style.display = "none";
+        } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less";
+            moreText.style.display = "inline";
+        }
+    }
+</script>
